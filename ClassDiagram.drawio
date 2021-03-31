@@ -1,1 +1,37 @@
-<mxfile host="app.diagrams.net" modified="2021-03-31T16:14:08.974Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="HaZOBDHbB8An0C6RIJKk" version="14.5.3" type="github"><diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">7Vltb+I4EP41SO1KnPLCS/cjpIXtHVTdhW7vPq1MYoivTpw6pkB//Y0Th7yzKQXdF6RIjccz48w8j8fj0jItbzvmKHCnzMG0ZWjOtmXetgxD7xhGSz6as4sl/Z4SrDhxlFIqmJF3rISakq6Jg8OcomCMChLkhTbzfWyLnAxxzjZ5tSWj+VUDtMIlwcxGtCx9Jo5wY+mN0U/l3zBZucnKeu9rPOOhRFlFErrIYZuMyLxrmRZnTMRv3tbCVCYvycvz/e6ZTl564z+/h6/oafjX/OFnO3Y2+ojJPgSOfXG0696/3YdfONy8/hoM56+T98kPf6VMtDdE1ypfLaNHYZHhdL4LMAxW0QAJTmys8iB2SXLDDfEo8mE0XDJfzNSMDmNEycqHdxu+GXMQvGEuCOAyUBOCBSC1XUKdCdqxtYwsFMh+SUZDl3HyDm4RVT5hmgtFMaOX05hJSxBrIOU4BJ3HJF16QTRF25ziBIVCCWxGKQpCstiH4SG+Iv6QCcE8pdQQDYWaDBtvM1xU6Iwx87DgO1BRswnP1Ea7UQ42KWs7HaXiZhjbM5UQqZ2y2ntO2QAvihAfIIdeIkcbhng6mD8sJgAi8AHyMZAyXxAAGTAxTF3mKFW0GJU7+7BqJekCsJ+jRWRWMf3lS8syWgMt4yr3WqAqgCAiCnH2guVHASdvfRZzl1BaECX0pXgpaskbBsgm/moS6dx2UskPBY8UMbBd0qhwuMRxsC+JxwQSKGaZ/NqAEV9E8HWH8EBMlvZHt9WFD7dgrKdjeKQ6FxbzIRZEIg5ioPAGSxpXsPPgxv89OxUdZWqb0LHTORMbjYpSVcCYkgi7GOOk2utHAewBVBSniM4l4LdtvYS6WUbdrECYogWmjywkgjDpn8e6BeT/L3D7WkNwz1VqzNpzKPlrc4zEfvOnf+HR9seTdoVzpSkpNpYsPPtadJ0vGccsY0NtSodxZausUofWgr4ImLorL6aV1ruuq3KR3mC+wkIFLlXrSm1eXWXjsEHZNkyXkiZVB8F1rV2yplStPhlqI62MAs4HiwW7TAx1Z0W1PaS4YL9PepOlUVifBMW6JMoG6Tneo5qh2PsQG0sfMVguie1irpLwW9pN11T8RPSq6eIHcqw83pK3Ezk8HKjjgE20jXPrKEeNPnW2Xnzah0zgp53MOfLDQLo5rH7piE56aOp6w1Oza5zg2Hx6fB88uf/M6Fs4eJp9p+OxaVV06Bbe2jiImozLZe2Ml7VuJ39b040yGYxuBRn0U1zXKslQ1SDLCoHv/rYs5hQOjEsxEA021meuR5XwJ3onR7+qg75cj04DbtdoBu7NmbDtfOp2lB4JxX7uGBf4LtumVPbszS455U+7lKSTsrbX8ETqn+tA6tbSNsgh3Xtdy/+hq+M7JpYWbCOSSZbE8naEoJzrZOYkSdoKejmnOpi9zwzvopVJRoA8SQlaHt1LH0sUtc+xOG+S8wipIcVVFrwkSQRZ34n9oqgNsqAoc7lMWvL7ShKfXh/qUUmOd88+y2XfUhdKRXRHHHHmjQjFV4G8NkZthaoLo/vJ3XXuJhJdwWuSkw+3UAaqN3Jht2e2rCwNSYsbZ0s31HiEPELl7viG6RuWXmVehZe0rGdrFvV8s9gxK7Zm/zRbE4bpT1LRXOaHPfPuPw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-03-31T21:11:51.327Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="UCh13rtCEzfiOpeBeCnU" version="14.5.3" type="github">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="462" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="6j5N_eswq_ABTqLzLRng-0" value="&lt;MType&gt;CMatrice" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="20" y="81" width="440" height="630" as="geometry" />
+        </mxCell>
+        <mxCell id="6j5N_eswq_ABTqLzLRng-1" value="- eMATNbLigne : entier&#xa;- eMATNbColonne : entier&#xa;- &lt;MType&gt;pMATTab:&lt;MType&gt;** &#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="6j5N_eswq_ABTqLzLRng-0" vertex="1">
+          <mxGeometry y="26" width="440" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="6j5N_eswq_ABTqLzLRng-2" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="6j5N_eswq_ABTqLzLRng-0" vertex="1">
+          <mxGeometry y="70" width="440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6j5N_eswq_ABTqLzLRng-3" value="&lt;&lt;create&gt;&gt;+ CMatrice (eNbLigne :entier, eNbColonne)&#xa;&lt;&lt;create&gt;&gt;+ CMatrice (cMATMatrice : &lt;MType&gt;)&#xa;&lt;&lt;destroy&gt;&gt; + CMatrice ()&#xa;&#xa;+ MATgetNbLigne() : entier&#xa;+ MATgetNbColonne() : entier&#xa;&#xa;+ MATsetNbLigne( eLigne : entier)&#xa;+ MATsetNbColonne( eColonne : entier)&#xa;&#xa;&#xa;+ MATgetTabCopy() : &lt;MType&gt;**&#xa;+ MATgetMatCopy() : Matrice&#xa;&#xa;+ MATgetTabCase( eLigne : entier, eColonne: entier)&#xa;+ MATsetTabCase( eLigne : entier, eColonne: entier, elem : &lt;MType&gt;)&#xa;&#xa;+ MATAfficherMatrice()&#xa;&#xa;+ MATMultVal( elem : &lt;MType&gt;) : Matrice&#xa;+ MATDivVal( elem : &lt;MType&gt;) : Matrice&#xa;&#xa;&#xa;+ MATAddMat(cMATelem : Matrice) : Matrice&#xa;+ MATSubMat(cMATelem : Matrice) : Matrice&#xa;+ MATMultMat(cMATelem : Matrice) : Matrice&#xa;+ MATTranspMat() : Matrice&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="6j5N_eswq_ABTqLzLRng-0" vertex="1">
+          <mxGeometry y="110" width="440" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="UPzAUhYSlvsAUSQlGG3C-1" value="Cexception" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="540" y="120" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="UPzAUhYSlvsAUSQlGG3C-2" value="+ eEXCCode: entier" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="UPzAUhYSlvsAUSQlGG3C-1" vertex="1">
+          <mxGeometry y="26" width="250" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="UPzAUhYSlvsAUSQlGG3C-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="UPzAUhYSlvsAUSQlGG3C-1" vertex="1">
+          <mxGeometry y="52" width="250" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="UPzAUhYSlvsAUSQlGG3C-4" value="&lt;&lt;create&gt;&gt;+ Cexception()&#xa;&lt;&lt;create&gt;&gt;+ Cexception(eElem : entier)&#xa;&lt;&lt;destroy&gt;&gt;+ Cexception()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="UPzAUhYSlvsAUSQlGG3C-1" vertex="1">
+          <mxGeometry y="60" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="UPzAUhYSlvsAUSQlGG3C-5" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Interface&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ creerMatFromFile(pfichier : FILE): Matrice**&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="510" y="430" width="270" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
