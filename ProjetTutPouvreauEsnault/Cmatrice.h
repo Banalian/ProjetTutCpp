@@ -28,12 +28,12 @@ public:
 
 
 	/*-------A MODIFIER :  ils nous faut des operator, et non ces fonctions-----------*/
-	Cmatrice* MATMultVal(MType elem);
-	Cmatrice* MATDivVal(MType elem);
+	Cmatrice<MType>* MATMultVal(MType elem);
+	Cmatrice<MType>* MATDivVal(MType elem);
 
-	Cmatrice* MATAddMat(Cmatrice* cMATelem);
-	Cmatrice* MATSubMat(Cmatrice* cMATelem);
-	Cmatrice* MATMultMat(Cmatrice* cMATelem);
+	Cmatrice<MType>* MATAddMat(Cmatrice* cMATelem);
+	Cmatrice<MType>* MATSubMat(Cmatrice* cMATelem);
+	Cmatrice<MType>* MATMultMat(Cmatrice* cMATelem);
 	/*--------------------------------------------------------------------------------*/
 
 	Cmatrice* MATTranspMat();
