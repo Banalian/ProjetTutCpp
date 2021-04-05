@@ -1,5 +1,6 @@
 #pragma once
 
+
 template <class MType> class Cmatrice
 {
 private:
@@ -9,7 +10,7 @@ private:
 
 public:
 	Cmatrice(int iNbLigne, int iNbColonne);
-	Cmatrice(Cmatrice &cMATMatrice);
+	Cmatrice(Cmatrice<MType> &cMATMatrice);
 	~Cmatrice();
 
 	int  MATgetNbLigne();
@@ -21,22 +22,29 @@ public:
 	MType** MATgetTabCopy();
 	Cmatrice* MATgetMatCopy();
 
-	MType* MATgetTabCase(int iLigne, int iColonne);
-	void MATsetTabCase(int iLigne, int iColonne, MType *elem);
+	MType MATgetTabCase(int iLigne, int iColonne);
+	void MATsetTabCase(int iLigne, int iColonne, MType elem);
 
 	void MATAfficherMatrice();
 
+
+	Cmatrice<MType>& operator*(MType elem);
+	Cmatrice<MType>& operator/(MType elem);
+
+	Cmatrice<MType>& operator+(Cmatrice<MType>* cMATelem);
+	Cmatrice<MType>& operator-(Cmatrice<MType>* cMATelem);
+	Cmatrice<MType>& operator*(Cmatrice<MType>* cMATelem);
 
 	/*-------A MODIFIER :  ils nous faut des operator, et non ces fonctions-----------*/
 	Cmatrice<MType>* MATMultVal(MType elem);
 	Cmatrice<MType>* MATDivVal(MType elem);
 
-	Cmatrice<MType>* MATAddMat(Cmatrice* cMATelem);
-	Cmatrice<MType>* MATSubMat(Cmatrice* cMATelem);
-	Cmatrice<MType>* MATMultMat(Cmatrice* cMATelem);
+	Cmatrice<MType>* MATAddMat(Cmatrice<MType>* cMATelem);
+	Cmatrice<MType>* MATSubMat(Cmatrice<MType>* cMATelem);
+	Cmatrice<MType>* MATMultMat(Cmatrice<MType>* cMATelem);
 	/*--------------------------------------------------------------------------------*/
 
-	Cmatrice* MATTranspMat();
+	Cmatrice<MType>* MATTranspMat();
 
 };
 
@@ -50,6 +58,14 @@ public:
 template<class MType>
 Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 {
+	iMATNbColonne = iNbColonne;
+	iMATNbLigne = iNbLigne;
+
+	pMATTab = new MType*[iMATNbColonne];
+
+	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		pMATTab[iBoucle] = new MType[iMATNbLigne];
+	}
 }
 
 
@@ -59,8 +75,28 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 * @return l'objet créé
 */
 template<class MType>
-Cmatrice<MType>::Cmatrice(Cmatrice & cMATMatrice)
+Cmatrice<MType>::Cmatrice(Cmatrice<MType> & cMATMatrice)
 {
+	
+	iMATNbColonne = cMATMatrice.iMATNbColonne;
+	iMATNbLigne = cMATMatrice.iMATNbLigne;
+
+	pMATTab = new MType*[iMATNbColonne];
+
+	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		pMATTab[iBoucle] = new MType[iMATNbLigne];
+	}
+
+
+
+	for (int ii = 0; ii < iMATNbColonne ; ii -= -1) {
+
+		for (int ij = 0; ij < iMATNbColonne; ij -= -1) {
+
+			pMATTab[ij][ii] = cMATMatrice.pMATTab[ij][ii];
+			
+		}
+	}
 }
 
 
@@ -70,6 +106,7 @@ Cmatrice<MType>::Cmatrice(Cmatrice & cMATMatrice)
 template<class MType>
 Cmatrice<MType>::~Cmatrice()
 {
+	delete pMATTab;
 }
 
 
@@ -80,7 +117,7 @@ Cmatrice<MType>::~Cmatrice()
 template<class MType>
 int Cmatrice<MType>::MATgetNbLigne()
 {
-	return 0;
+	return iMATNbLigne;
 }
 
 
@@ -91,7 +128,7 @@ int Cmatrice<MType>::MATgetNbLigne()
 template<class MType>
 int Cmatrice<MType>::MATgetNbColonne()
 {
-	return 0;
+	return iMATNbColonne;
 }
 
 
@@ -122,7 +159,7 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 template<class MType>
 MType ** Cmatrice<MType>::MATgetTabCopy()
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -133,7 +170,7 @@ MType ** Cmatrice<MType>::MATgetTabCopy()
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATgetMatCopy()
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -144,9 +181,9 @@ Cmatrice<MType> * Cmatrice<MType>::MATgetMatCopy()
 * @return un pointeur vers la variable contenu dans la case
 */
 template<class MType>
-MType * Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
+MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 {
-	return NULL;
+	return (pMATTab[iColonne][iLigne]);
 }
 
 
@@ -156,8 +193,9 @@ MType * Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 * @param iColonne la colonne où est la case que l'on veut remplir
 */
 template<class MType>
-void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType * elem)
+void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 {
+	pMATTab[iColonne][iLigne] = elem;
 }
 
 
@@ -167,6 +205,36 @@ void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType * elem)
 template<class MType>
 void Cmatrice<MType>::MATAfficherMatrice()
 {
+}
+
+template<class MType>
+inline Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
+{
+	// TODO: insérer une instruction return ici
+}
+
+template<class MType>
+inline Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
+{
+	// TODO: insérer une instruction return ici
+}
+
+template<class MType>
+inline Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType>* cMATelem)
+{
+	// TODO: insérer une instruction return ici
+}
+
+template<class MType>
+inline Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType>* cMATelem)
+{
+	// TODO: insérer une instruction return ici
+}
+
+template<class MType>
+inline Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType>* cMATelem)
+{
+	// TODO: insérer une instruction return ici
 }
 
 
@@ -180,7 +248,7 @@ void Cmatrice<MType>::MATAfficherMatrice()
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATMultVal(MType elem)
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -192,7 +260,7 @@ Cmatrice<MType> * Cmatrice<MType>::MATMultVal(MType elem)
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATDivVal(MType elem)
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -202,9 +270,9 @@ Cmatrice<MType> * Cmatrice<MType>::MATDivVal(MType elem)
 * @return
 */
 template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATAddMat(Cmatrice * cMATelem)
+Cmatrice<MType> * Cmatrice<MType>::MATAddMat(Cmatrice<MType> * cMATelem)
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -214,9 +282,9 @@ Cmatrice<MType> * Cmatrice<MType>::MATAddMat(Cmatrice * cMATelem)
 * @return
 */
 template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATSubMat(Cmatrice * cMATelem)
+Cmatrice<MType> * Cmatrice<MType>::MATSubMat(Cmatrice<MType> * cMATelem)
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -226,9 +294,9 @@ Cmatrice<MType> * Cmatrice<MType>::MATSubMat(Cmatrice * cMATelem)
 * @return
 */
 template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATMultMat(Cmatrice * cMATelem)
+Cmatrice<MType> * Cmatrice<MType>::MATMultMat(Cmatrice<MType> * cMATelem)
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -239,6 +307,6 @@ Cmatrice<MType> * Cmatrice<MType>::MATMultMat(Cmatrice * cMATelem)
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATTranspMat()
 {
-	return NULL;
+	return nullptr;
 }
 
