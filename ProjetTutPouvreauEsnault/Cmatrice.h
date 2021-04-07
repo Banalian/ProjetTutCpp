@@ -255,6 +255,12 @@ void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 template<class MType>
 void Cmatrice<MType>::MATAfficherMatrice()
 {
+	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+			std::cout << pMATTab[jBoucle][iBoucle] << "\t";
+		}
+		std::cout << std::endl;
+	}
 }
 
 template<class MType>

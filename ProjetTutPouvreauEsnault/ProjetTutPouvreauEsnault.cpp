@@ -12,9 +12,9 @@
 #include "Cmatrice.h"
 #include "FileReader.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "Hello World!\n"; 
+    //std::cout << "Hello World!\n"; 
 
 	/*Cmatrice<int> testMat(3,3);
 	Cmatrice<float> testMatf(4, 4);
@@ -33,6 +33,14 @@ int main()
 	std::fstream myFile("testFile.txt");
 
 	Cmatrice<double>*matDouble = createLfMatFromFile<double>(&myFile);
+	
+
+	if (matDouble != nullptr) {
+		matDouble->MATAfficherMatrice();
+		delete matDouble;
+	}
+	
+
 
 
 	
