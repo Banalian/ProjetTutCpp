@@ -152,11 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cexception.cpp" />
     <ClCompile Include="Cmatrice.cpp" />
     <ClCompile Include="ProjetTutPouvreauEsnault.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cexception.h" />
     <ClInclude Include="Cmatrice.h" />
+    <ClInclude Include="FileReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
