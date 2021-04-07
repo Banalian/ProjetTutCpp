@@ -1,4 +1,5 @@
 #pragma once
+#include "Cexception.h"
 
 
 template <class MType> class Cmatrice
@@ -20,7 +21,7 @@ public:
 	void MATsetNbColonne(int iColonne);
 
 	MType** MATgetTabCopy(); //DONE
-	Cmatrice* MATgetMatCopy();
+	Cmatrice* MATgetMatCopy(); //DONE
 
 	MType MATgetTabCase(int iLigne, int iColonne); //DONE
 	void MATsetTabCase(int iLigne, int iColonne, MType elem); 
@@ -190,7 +191,8 @@ MType ** Cmatrice<MType>::MATgetTabCopy()
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATgetMatCopy()
 {
-	return nullptr;
+	Cmatrice<MType> *matCopy = CmatriceCopy(Cmatrice<MType>);
+	return (matCopy);
 }
 
 
@@ -215,7 +217,27 @@ MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 template<class MType>
 void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 {
-	pMATTab[iColonne][iLigne] = elem;
+	try{
+		if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
+			throw Cexception(101);
+		}
+		else {
+			pMATTab[iColonne][iLigne] = elem;
+		}
+	}
+	catch(Cexception e){
+		
+		int CodeErr = e.EXCLire_Code();
+		switch (CodeErr) {
+		case 101:
+			std::cout << "erreur de taille" << std::endl;
+			break;
+				
+		default:
+			break;
+		}
+		
+	}
 }
 
 
