@@ -9,21 +9,21 @@ private:
 	MType ** pMATTab;
 
 public:
-	Cmatrice(int iNbLigne, int iNbColonne);
-	Cmatrice(Cmatrice<MType> &cMATMatrice);
-	~Cmatrice();
+	Cmatrice(int iNbLigne, int iNbColonne); //DONE
+	Cmatrice(Cmatrice<MType> &cMATMatrice); //DONE
+	~Cmatrice(); //DONE /TO TEST
 
-	int  MATgetNbLigne();
-	int  MATgetNbColonne();
+	int  MATgetNbLigne(); //DONE
+	int  MATgetNbColonne(); //DONE
 
 	void MATsetNbLigne(int iLigne);
 	void MATsetNbColonne(int iColonne);
 
-	MType** MATgetTabCopy();
+	MType** MATgetTabCopy(); //DONE
 	Cmatrice* MATgetMatCopy();
 
-	MType MATgetTabCase(int iLigne, int iColonne);
-	void MATsetTabCase(int iLigne, int iColonne, MType elem);
+	MType MATgetTabCase(int iLigne, int iColonne); //DONE
+	void MATsetTabCase(int iLigne, int iColonne, MType elem); 
 
 	void MATAfficherMatrice();
 
