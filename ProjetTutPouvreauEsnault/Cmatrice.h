@@ -106,6 +106,10 @@ Cmatrice<MType>::Cmatrice(Cmatrice<MType> & cMATMatrice)
 template<class MType>
 Cmatrice<MType>::~Cmatrice()
 {
+	
+	for (int i = 0; i < iMATNbColonne; i++) {
+		delete pMATTab[i];
+	}
 	delete pMATTab;
 }
 
@@ -159,7 +163,23 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 template<class MType>
 MType ** Cmatrice<MType>::MATgetTabCopy()
 {
-	return nullptr;
+
+	MType** pMTYtemp = new MType*[iMATNbColonne];
+
+	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		pMTYtemp[iBoucle] = new MType[iMATNbLigne];
+	}
+
+	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+
+		for (int ij = 0; ij < iMATNbColonne; ij -= -1) {
+
+			pMTYtemp[ij][ii] = MATgetTabCase(ii, ij);
+
+		}
+	}
+
+	return pMTYtemp;
 }
 
 
