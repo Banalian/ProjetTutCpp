@@ -37,7 +37,10 @@ int main(int argc, char *argv[])
 
 	if (matDouble != nullptr) {
 		matDouble->MATAfficherMatrice();
+		Cmatrice<double>*matDoubleT = matDouble->MATTranspMat();
+		matDoubleT->MATAfficherMatrice();
 		delete matDouble;
+		delete matDoubleT;
 	}
 	
 
