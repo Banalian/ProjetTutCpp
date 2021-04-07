@@ -1,5 +1,4 @@
 #pragma once
-#include "Cmatrice.h"
 
 class Cexception
 {

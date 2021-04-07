@@ -10,12 +10,13 @@
 
 #include <iostream>
 #include "Cmatrice.h"
+#include "FileReader.h"
 
 int main()
 {
     std::cout << "Hello World!\n"; 
 
-	Cmatrice<int> testMat(3,3);
+	/*Cmatrice<int> testMat(3,3);
 	Cmatrice<float> testMatf(4, 4);
 
 	testMat.MATsetTabCase(2, 2, 3);
@@ -26,7 +27,12 @@ int main()
 	testMat.MATsetTabCase(2, 2, 5);
 
 
-	std::cout << "case int 2 2 : " << testMatCopy.MATgetTabCase(2, 2) << std::endl;
+
+	std::cout << "case int 2 2 : " << testMatCopy.MATgetTabCase(2, 2) << std::endl;*/
+
+	std::fstream myFile("testFile.txt");
+
+	Cmatrice<double>*matDouble = createLfMatFromFile<double>(&myFile);
 
 
 	

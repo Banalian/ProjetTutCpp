@@ -217,28 +217,36 @@ MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 template<class MType>
 void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 {
-	try{
+
+
+	try {
 		if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
 			throw Cexception(101);
 		}
-		else {
-			pMATTab[iColonne][iLigne] = elem;
-		}
+
+		pMATTab[iColonne][iLigne] = elem;
+
 	}
-	catch(Cexception e){
-		
-		int CodeErr = e.EXCLire_Code();
-		switch (CodeErr) {
-		case 101:
+	catch (Cexception e) {
+
+		int codeErr = e.EXCLire_Code();
+		switch (codeErr)
+		{
+		case 101: 
 			std::cout << "erreur de taille" << std::endl;
 			break;
-				
 		default:
 			break;
 		}
-		
 	}
+
+
+	
 }
+
+
+
+
 
 
 /**

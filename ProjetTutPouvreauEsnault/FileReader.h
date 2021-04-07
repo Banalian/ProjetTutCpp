@@ -22,18 +22,18 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 			myFile->getline(line, 2048);
 
 			std::cout << line << "<end" << std::endl;
-			if (line != "TypeMatrice=double") {
+			if (strcmp(line, "TypeMatrice=double")) {
 				throw Cexception(201);
 			}
 
 
-			//myFile->getline(line, 2048);
+			myFile->getline(line, 2048);
 
-			//char *buf;
+			char *buf;
 
-			//buf = strtok(line, "=");
-
-			//std::cout << "buf->" << buf << std::endl;
+			strtok(line, "=");
+			buf = strtok(NULL, "=");
+			std::cout << "buf->" << buf <<" <-and line->"<< line << std::endl;
 
 		}catch(Cexception e){
 
@@ -42,6 +42,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 			{
 			case 201: 
 				std::cout << "Erreur :  type demandé différent de double" << std::endl;
+				break;
 			default:
 				break;
 			}
