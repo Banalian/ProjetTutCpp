@@ -59,6 +59,9 @@ public:
 template<class MType>
 Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 {
+	if (iColonne < 0 || iLigne < 0) {
+		throw Cexception(102);
+	}
 	iMATNbColonne = iNbColonne;
 	iMATNbLigne = iNbLigne;
 
@@ -205,6 +208,9 @@ Cmatrice<MType> * Cmatrice<MType>::MATgetMatCopy()
 template<class MType>
 MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 {
+	if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
+		throw Cexception(101);
+	}
 	return (pMATTab[iColonne][iLigne]);
 }
 

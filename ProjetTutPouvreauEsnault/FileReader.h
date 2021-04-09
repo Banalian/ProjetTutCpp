@@ -9,6 +9,15 @@
 #define BUFFSIZE 2048
 
 
+#define ERRHorsFomatMat 101
+#define ERRBadSizeMat 102
+#define ERRBadTypeFile 201
+#define ERRBadColNb 202
+#define ERRBadLineNb 203
+#define ERRWrongSizeAdd 251
+#define ERRWrongSizeMinus 252
+
+
 template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile) {
 
 	
@@ -103,25 +112,29 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 			int codeErr = e.EXCLire_Code();
 			switch (codeErr)
 			{
-			case 101:
-				std::cout << "erreur de taille" << std::endl;
+			case ERRHorsFomatMat:
+				std::cout << "Erreur : Emplacement donné non valide (ligne ou colonne trop grand ou inférieur à 0" << std::endl;
 				break;
-			case 201: 
-				std::cout << "Erreur :  type demandé différent de double" << std::endl;
+			case ERRBadSizeMat:
+				std::cout << "Erreur : Taille de Matrice invalide  :  Ligne ou Colonne < 0 " << std::endl;
 				break;
-			case 202:
-				std::cout << "Erreur : taille incorrecte : nbColonne plus petit que le nombre de valeur trouvées dans le fichier sur la ligne" << std::endl;
+			case ERRBadTypeFile:
+				std::cout << "Erreur : Type demandé différent de double" << std::endl;
 				break;
-			case 203:
-				std::cout << "Erreur : taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvées dans le fichier" << std::endl;
+			case ERRBadColNb:
+				std::cout << "Erreur : Taille incorrecte : nbColonne plus petit que le nombre de valeur trouvées dans le fichier sur la ligne" << std::endl;
 				break;
-			case 251:
+			case ERRBadLineNb:
+				std::cout << "Erreur : Taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvées dans le fichier" << std::endl;
+				break;
+			case ERRWrongSizeAdd:
 				std::cout << "Erreur : Taille des matrices différentes, addition impossible" << std::endl;
 				break;
-			case 252:
+			case ERRWrongSizeMinus:
 				std::cout << "Erreur : Taille des matrices différentes, soustraction impossible" << std::endl;
 				break;
 			default:
+				std::cout << "Erreur non repertoriée" << std::endl;
 				break;
 			}
 			return nullptr;
