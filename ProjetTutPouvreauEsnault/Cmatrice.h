@@ -17,8 +17,8 @@ public:
 	int  MATgetNbLigne(); //DONE
 	int  MATgetNbColonne(); //DONE
 
-	void MATsetNbLigne(int iLigne);
-	void MATsetNbColonne(int iColonne);
+	void MATsetNbLigne(int iLigne); //DONE
+	void MATsetNbColonne(int iColonne); //DONE
 
 	MType** MATgetTabCopy(); //DONE
 	Cmatrice* MATgetMatCopy(); //DONE
@@ -59,7 +59,7 @@ public:
 template<class MType>
 Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 {
-	if (iColonne < 0 || iLigne < 0) {
+	if (iNbColonne < 0 || iNbLigne < 0) {
 		throw Cexception(102);
 	}
 	iMATNbColonne = iNbColonne;
@@ -95,9 +95,9 @@ Cmatrice<MType>::Cmatrice(Cmatrice<MType> & cMATMatrice)
 
 	for (int ii = 0; ii < iMATNbColonne ; ii -= -1) {
 
-		for (int ij = 0; ij < iMATNbColonne; ij -= -1) {
+		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
 
-			pMATTab[ij][ii] = cMATMatrice.pMATTab[ij][ii];
+			pMATTab[ii][ij] = cMATMatrice.pMATTab[ii][ij];
 			
 		}
 	}
@@ -147,16 +147,95 @@ int Cmatrice<MType>::MATgetNbColonne()
 template<class MType>
 void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 {
+	if (iLigne < 0) {
+		throw Cexception(103);
+	}
+
+	int ligne = 0;
+
+	if (iLigne < iMATNbLigne) {
+		ligne = iLigne;
+	}
+	else {
+		ligne = iMATNbLigne;
+	}
+
+	//on crée un nouveau tableau de la bonne taille
+	MType** pMATTemp = new MType*[iMATNbColonne];
+	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		pMATTemp[iBoucle] = new MType[iLigne];
+	}
+
+	//on recopie les valeurs du tableau actuel dans le tableau qui le remplacera
+	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+
+		for (int ij = 0; ij < ligne; ij -= -1) {
+
+			pMATTemp[ii][ij] = pMATTab[ii][ij];
+
+		}
+	}
+
+
+	//on supprime l'ancien tableau
+	for (int i = 0; i < iMATNbColonne; i++) {
+		delete pMATTab[i];
+	}
+	delete pMATTab;
+
+
+	iMATNbLigne = iLigne;
+	pMATTab = pMATTemp;
 }
 
 
 /**
-* @brief change le nombre de colonne du tableau. ATTENTION :  toute donnée hors format sera perdu (mais non détruite) et les nouvelles cases seront vide
+* @brief change le nombre de colonne du tableau. ATTENTION :  toute donnée hors format sera perdue et détruite et les nouvelles cases seront vide
 * @param le nouveau nombre de colonne
 */
 template<class MType>
 void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 {
+	if (iColonne < 0) {
+		throw Cexception(103);
+	}
+	int colonne = 0;
+	if (iColonne < iMATNbColonne) {
+		colonne = iColonne;
+	}
+	else {
+		colonne = iMATNbColonne;
+	}
+
+
+
+	//on crée un nouveau tableau de la bonne taille
+	MType** pMATTemp = new MType*[iColonne];
+	for (int iBoucle = 0; iBoucle < iColonne; iBoucle++) {
+		pMATTemp[iBoucle] = new MType[iMATNbLigne];
+	}
+
+	//on recopie les valeurs du tableau actuel dans le tableau qui le remplacera
+	for (int ii = 0; ii < colonne; ii -= -1) {
+
+		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
+
+			pMATTemp[ii][ij] = pMATTab[ii][ij];
+
+		}
+	}
+
+
+
+	//on supprime l'ancien tableau
+	for (int i = 0; i < iMATNbColonne; i++) {
+		delete pMATTab[i];
+	}
+	delete pMATTab;
+
+
+	iMATNbColonne = iColonne;
+	pMATTab = pMATTemp;
 }
 
 
