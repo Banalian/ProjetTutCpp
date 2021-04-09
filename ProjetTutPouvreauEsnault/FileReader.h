@@ -103,6 +103,9 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 			int codeErr = e.EXCLire_Code();
 			switch (codeErr)
 			{
+			case 101:
+				std::cout << "erreur de taille" << std::endl;
+				break;
 			case 201: 
 				std::cout << "Erreur :  type demandé différent de double" << std::endl;
 				break;
@@ -111,6 +114,12 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 				break;
 			case 203:
 				std::cout << "Erreur : taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvées dans le fichier" << std::endl;
+				break;
+			case 251:
+				std::cout << "Erreur : Taille des matrices différentes, addition impossible" << std::endl;
+				break;
+			case 252:
+				std::cout << "Erreur : Taille des matrices différentes, soustraction impossible" << std::endl;
 				break;
 			default:
 				break;

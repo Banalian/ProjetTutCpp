@@ -219,27 +219,11 @@ void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 {
 
 
-	try {
-		if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
-			throw Cexception(101);
-		}
-
-		pMATTab[iColonne][iLigne] = elem;
-
-	}
-	catch (Cexception e) {
-
-		int codeErr = e.EXCLire_Code();
-		switch (codeErr)
-		{
-		case 101: 
-			std::cout << "erreur de taille" << std::endl;
-			break;
-		default:
-			break;
-		}
+	if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
+		throw Cexception(101);
 	}
 
+	pMATTab[iColonne][iLigne] = elem;
 
 	
 }
@@ -290,36 +274,24 @@ template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType>* cMATelem)
 {
 
-	try {
-
-		//si les matrices ne sont pas de la meme taille
-		if ((iMATNbColonne != cMATelem->MATgetNbColonne()) || (iMATNbLigne != cMATelem->MATgetNbLigne())) {
-			throw Cexception(251);
-		}
-
-		Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
-
-
-		for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-			for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
-				//simple C = A + B pour chaque cases
-				pMATTemp[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] + cMATelem->MATgetTabCase(iBoucle, jBoucle);
-			}
-		}
-
-
-		return *pMATTemp;
+	//si les matrices ne sont pas de la meme taille
+	if ((iMATNbColonne != cMATelem->MATgetNbColonne()) || (iMATNbLigne != cMATelem->MATgetNbLigne())) {
+		throw Cexception(251);
 	}
-	catch (Cexception e) {
-		int iCodeErr = e.EXCLire_Code();
-		switch (iCodeErr)
-		{
-		case 251:
-			std::cout << "Erreur : Taille des matrices différentes, addition impossible" << std::endl;
-		default:
-			break;
+	
+	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
+
+
+	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+			//simple C = A + B pour chaque cases
+			pMATTemp[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] + cMATelem->MATgetTabCase(iBoucle, jBoucle);
 		}
 	}
+
+
+	return *pMATTemp;
+
 
 	
 }
@@ -327,36 +299,27 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType>* cMATelem)
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType>* cMATelem)
 {
-	try {
-
-		//si les matrices ne sont pas de la meme taille
-		if ((iMATNbColonne != cMATelem->MATgetNbColonne()) || (iMATNbLigne != cMATelem->MATgetNbLigne())) {
-			throw Cexception(251);
-		}
-
-		Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 
 
-		for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-			for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
-				//simple C = A - B pour chaque cases
-				pMATTemp[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] - cMATelem->MATgetTabCase(iBoucle, jBoucle);
-			}
-		}
-
-
-		return *pMATTemp;
+	//si les matrices ne sont pas de la meme taille
+	if ((iMATNbColonne != cMATelem->MATgetNbColonne()) || (iMATNbLigne != cMATelem->MATgetNbLigne())) {
+		throw Cexception(252);
 	}
-	catch (Cexception e) {
-		int iCodeErr = e.EXCLire_Code();
-		switch (iCodeErr)
-		{
-		case 251:
-			std::cout << "Erreur : Taille des matrices différentes, soustraction impossible" << std::endl;
-		default:
-			break;
+
+	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
+
+
+	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+			//simple C = A - B pour chaque cases
+			pMATTemp[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] - cMATelem->MATgetTabCase(iBoucle, jBoucle);
 		}
 	}
+
+
+	return *pMATTemp;
+	
+
 }
 
 template<class MType>
