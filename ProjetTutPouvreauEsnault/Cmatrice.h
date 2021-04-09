@@ -24,28 +24,28 @@ public:
 	Cmatrice* MATgetMatCopy(); //DONE
 
 	MType MATgetTabCase(int iLigne, int iColonne); //DONE
-	void MATsetTabCase(int iLigne, int iColonne, MType elem); 
+	void MATsetTabCase(int iLigne, int iColonne, MType elem); //DONE
 
-	void MATAfficherMatrice();
+	void MATAfficherMatrice(); //DONE
 
 
-	Cmatrice<MType>& operator*(MType elem);
-	Cmatrice<MType>& operator/(MType elem);
+	Cmatrice<MType>& operator*(MType elem); //DONE
+	Cmatrice<MType>& operator/(MType elem); //DONE
 
-	Cmatrice<MType>& operator+(Cmatrice<MType>* cMATelem);
-	Cmatrice<MType>& operator-(Cmatrice<MType>* cMATelem);
-	Cmatrice<MType>& operator*(Cmatrice<MType>* cMATelem);
+	Cmatrice<MType>& operator+(Cmatrice<MType>* cMATelem); //DONE
+	Cmatrice<MType>& operator-(Cmatrice<MType>* cMATelem); //DONE
+	Cmatrice<MType>& operator*(Cmatrice<MType>* cMATelem); //JE M'EN OCCUPE LILIAN
 
 	/*-------A MODIFIER :  ils nous faut des operator, et non ces fonctions-----------*/
-	Cmatrice<MType>* MATMultVal(MType elem);
-	Cmatrice<MType>* MATDivVal(MType elem);
+	Cmatrice<MType>* MATMultVal(MType elem); //remplacée par operator* (MType elem)
+	Cmatrice<MType>* MATDivVal(MType elem); //remplacée par operator/ (MType elem)
 
-	Cmatrice<MType>* MATAddMat(Cmatrice<MType>* cMATelem);
-	Cmatrice<MType>* MATSubMat(Cmatrice<MType>* cMATelem);
-	Cmatrice<MType>* MATMultMat(Cmatrice<MType>* cMATelem);
+	Cmatrice<MType>* MATAddMat(Cmatrice<MType>* cMATelem); //remplacé par operator+(Cmatrice<MType>* cMATelem)
+	Cmatrice<MType>* MATSubMat(Cmatrice<MType>* cMATelem); //remplacé par operator-(Cmatrice<MType>* cMATelem)
+	Cmatrice<MType>* MATMultMat(Cmatrice<MType>* cMATelem); //remplacé par operator*(Cmatrice<MType>* cMATelem)
 	/*--------------------------------------------------------------------------------*/
 
-	Cmatrice<MType>* MATTranspMat();
+	Cmatrice<MType>* MATTranspMat(); //DONE
 
 };
 
@@ -332,6 +332,7 @@ template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType>* cMATelem)
 {
 	// TODO: insérer une instruction return ici
+	//LILIAN TU ME LAISSES LA FAIRE CELLE-LA
 }
 
 
