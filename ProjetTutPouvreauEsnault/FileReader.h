@@ -57,7 +57,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 			//std::cout << "Colonne : buf->" << buf << " <-and line->" << line << std::endl;
 			iColonne = atoi(buf);
 
-			std::cout << "Nouvelle matrice de " << iLigne << " Ligne(s) et " << iColonne << " Colonne(s)" << std::endl;
+			std::cout << "Nouvelle matrice de " << iLigne << " ligne(s) et " << iColonne << " colonne(s)" << std::endl;
 			
 			Cmatrice<double>* pMATTemp = new Cmatrice<double>(iLigne, iColonne);
 
