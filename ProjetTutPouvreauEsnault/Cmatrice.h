@@ -7,7 +7,7 @@ template <class MType> class Cmatrice
 private:
 	int iMATNbLigne;
 	int iMATNbColonne;
-	MType ** pMATTab;
+	MType ** pMATTab = {};
 
 public:
 	Cmatrice(int iNbLigne, int iNbColonne); //DONE
@@ -34,7 +34,7 @@ public:
 
 	Cmatrice<MType>& operator+(Cmatrice<MType>* cMATelem); //DONE
 	Cmatrice<MType>& operator-(Cmatrice<MType>* cMATelem); //DONE
-	Cmatrice<MType>& operator*(Cmatrice<MType>* cMATelem); //JE M'EN OCCUPE LILIAN
+	Cmatrice<MType>& operator*(Cmatrice<MType> cMATelem); //JE M'EN OCCUPE LILIAN
 
 	/*-------A MODIFIER :  ils nous faut des operator, et non ces fonctions-----------*/
 	Cmatrice<MType>* MATMultVal(MType elem); //remplacée par operator* (MType elem)
@@ -287,7 +287,7 @@ Cmatrice<MType> * Cmatrice<MType>::MATgetMatCopy()
 template<class MType>
 MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 {
-	if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
+	if (iColonne >= iMATNbColonne || iLigne >= iMATNbLigne || iColonne < 0 || iLigne < 0) {
 		throw Cexception(101);
 	}
 	return (pMATTab[iColonne][iLigne]);
@@ -408,10 +408,51 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType>* cMATelem)
 }
 
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType>* cMATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> cMATelem)
 {
 	// TODO: insérer une instruction return ici
-	//LILIAN TU ME LAISSES LA FAIRE CELLE-LA
+	/*Produit_matriciel(a: Matrice carr¶ee, b : Matrice carr¶ee, n :
+	entier) : Matrice carr¶ee
+	VAR c : Matrice carr¶ee n*n
+	i : entier
+	Debut
+		Pour i < -1 a n Faire
+			Pour j de 1 a n Faire
+				c[i][j] < -0
+				Pour k de 1 a n Faire
+					c[i][j] < -c[i][j] + a[i][k] * b[k][j]
+				Fpour
+			Fpour
+		Fpour
+	retourner c*/
+
+	if (cMATelem.MATgetNbLigne() != this->iMATNbColonne) {
+		throw Cexception(253);
+	}
+
+
+	Cmatrice<MType>*pMATTemp = new Cmatrice<MType>(this->iMATNbLigne, cMATelem.MATgetNbColonne());
+	MType temp;
+	int iLigne, iColonne, iMult;
+
+	for (iLigne = 0; iLigne < iMATNbLigne; iLigne++) {
+
+		for (iColonne = 0; iColonne < cMATelem.MATgetNbColonne(); iColonne++) {
+
+			temp = {};
+
+			for (iMult = 0; iMult < iMATNbColonne; iMult++) {
+				
+				temp += pMATTab[iMult][iLigne] * cMATelem.MATgetTabCase(iMult, iColonne);
+
+			}
+
+			pMATTemp->MATsetTabCase(iLigne, iColonne, temp);
+		}
+	}
+
+
+	return *pMATTemp;
 }
 
 
