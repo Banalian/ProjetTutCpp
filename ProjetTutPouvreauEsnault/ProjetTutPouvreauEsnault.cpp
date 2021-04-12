@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	
 	//crée une matrice pour chaque argv
 	Cmatrice<double>** matTab = new Cmatrice<double>*[argc - 1];
-	for (int i = 1; i < argc; i++) {
+	for (int i = 0; i < argc; i++) {
 		matTab[i] = createLfMatFromFile<double>(argv[i]);
 	}
 	
@@ -27,14 +27,14 @@ int main(int argc, char *argv[])
     std::cout << "Entrez un entier\n";
 	std::cin >> c;
 
-	int nbColonnes = matTab[1]->MATgetNbColonne();
-	int nbLignes = matTab[1]->MATgetNbLigne();
+	int nbColonnes = matTab[0]->MATgetNbColonne();
+	int nbLignes = matTab[0]->MATgetNbLigne();
 
 	Cmatrice<double> sumMat(nbLignes,nbColonnes);
 	Cmatrice<double> altSumMat(nbLignes,nbColonnes);
 	Cmatrice<double> multMat(nbLignes,nbColonnes);
 
-	for (int m = 1; m < argc; m++) {
+	for (int m = 0; m < argc; m++) {
 
 		try {
 
@@ -50,9 +50,9 @@ int main(int argc, char *argv[])
 
 
 			sumMat = sumMat + *matTab[m];							//on fait la somme des matrices
-			if (m % 2 != 0) { altSumMat = altSumMat + *matTab[m]; }	//somme des matrices avec alternance des signes
-			else { altSumMat = altSumMat - *matTab[m]; }
-			if (m == 1) { multMat = *matTab[m]; }
+			if (m % 2 != 0) { altSumMat = altSumMat - *matTab[m]; }	//somme des matrices avec alternance des signes
+			else { altSumMat = altSumMat + *matTab[m]; }
+			if (m == 0) { multMat = *matTab[m]; }
 			else { multMat = multMat * *matTab[m]; }							//produit des matrices
 
 
