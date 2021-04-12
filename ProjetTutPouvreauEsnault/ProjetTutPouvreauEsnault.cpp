@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {	
 	
 	//crée une matrice pour chaque argv
-	Cmatrice<double>** matTab = new Cmatrice<double>*[argc - 1];
+	Cmatrice<float>** matTab = new Cmatrice<float>*[argc - 1];
 	for (int i = 1; i < argc; i++) {
 		//std::fstream myFile(argv[i]);
 		//matTab[i] = createLfMatFromFile<double>(&myFile);
@@ -29,18 +29,39 @@ int main(int argc, char *argv[])
     std::cout << "Entrez un entier\n";
 	std::cin >> c;
 
-	
+	int nbColonnes = matTab[1]->MATgetNbColonne();
+	int nbLignes = matTab[1]->MATgetNbLigne();
 
-	//on multiplie chaque matrice par c
-	//on divise chaque matrice par c
-	//on fait la somme des matrices
-	//somme des matrices avec alternance des signes
-	//produit des matrices
+	Cmatrice<float> sumMat(nbLignes,nbColonnes);
+	Cmatrice<float> altSumMat(nbLignes,nbColonnes);
+	Cmatrice<float> multMat(nbLignes,nbColonnes);
+
+	for (int m = 1; m < argc; m++) {
+
+
+		Cmatrice<float> copyMatMult(*matTab[m]);				//on multiplie chaque matrice par c
+		copyMatMult*c;
+		copyMatMult.MATAfficherMatrice();
+
+		Cmatrice<float> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
+		copyMatDiv/c;
+		copyMatDiv.MATAfficherMatrice();
+
+		sumMat = sumMat + matTab[m];							//on fait la somme des matrices
+		if (m % 2 != 0) { altSumMat = altSumMat + matTab[m]; }	//somme des matrices avec alternance des signes
+		else { altSumMat = altSumMat - matTab[m]; }
+		multMat = multMat * *matTab[m];							//produit des matrices
+	}
+
+	sumMat.MATAfficherMatrice();
+	altSumMat.MATAfficherMatrice();
+	multMat.MATAfficherMatrice();
 
 	for (int i = 1; i < argc - 1; i++) {
 		delete matTab[i];
 	}
 	delete matTab;
+
 
 
 	/*Cmatrice<int> testMat(3,3);
