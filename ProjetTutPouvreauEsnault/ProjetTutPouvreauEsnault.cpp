@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 			copyMatMult.MATAfficherMatrice();
 
 			Cmatrice<double> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
-			copyMatMult = copyMatDiv / c;
+			copyMatDiv = copyMatDiv / c;
 			copyMatDiv.MATAfficherMatrice();
 			std::cout << "^ mult and div, sum below" << std::endl;
 			
