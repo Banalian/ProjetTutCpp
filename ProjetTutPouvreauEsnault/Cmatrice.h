@@ -37,18 +37,10 @@ public:
 	Cmatrice<MType>& operator*(MType elem); //DONE
 	Cmatrice<MType>& operator/(MType elem); //DONE
 
-	Cmatrice<MType>& operator+(Cmatrice<MType>* cMATelem); //DONE
-	Cmatrice<MType>& operator-(Cmatrice<MType>* cMATelem); //DONE
+	Cmatrice<MType>& operator+(Cmatrice<MType> cMATelem); //DONE
+	Cmatrice<MType>& operator-(Cmatrice<MType> cMATelem); //DONE
 	Cmatrice<MType>& operator*(Cmatrice<MType> cMATelem); //JE M'EN OCCUPE LILIAN
 
-	/*-------A MODIFIER :  ils nous faut des operator, et non ces fonctions-----------*/
-	Cmatrice<MType>* MATMultVal(MType elem); //remplacée par operator* (MType elem)
-	Cmatrice<MType>* MATDivVal(MType elem); //remplacée par operator/ (MType elem)
-
-	Cmatrice<MType>* MATAddMat(Cmatrice<MType>* cMATelem); //remplacé par operator+(Cmatrice<MType>* cMATelem)
-	Cmatrice<MType>* MATSubMat(Cmatrice<MType>* cMATelem); //remplacé par operator-(Cmatrice<MType>* cMATelem)
-	Cmatrice<MType>* MATMultMat(Cmatrice<MType>* cMATelem); //remplacé par operator*(Cmatrice<MType>* cMATelem)
-	/*--------------------------------------------------------------------------------*/
 
 	Cmatrice<MType>* MATTranspMat(); //DONE
 
