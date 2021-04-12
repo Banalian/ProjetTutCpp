@@ -129,15 +129,6 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 			case ERRBadLineNb:
 				std::cout << "Erreur : Taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvées dans le fichier" << std::endl;
 				break;
-			case ERRWrongSizeAdd:
-				std::cout << "Erreur : Taille des matrices différentes, addition impossible" << std::endl;
-				break;
-			case ERRWrongSizeMinus:
-				std::cout << "Erreur : Taille des matrices différentes, soustraction impossible" << std::endl;
-				break;
-			case ERRWrongSizeMult:
-				std::cout << "Erreur : Taille des matrices différentes, multiplication impossible" << std::endl;
-				break;
 			default:
 				std::cout << "Erreur non repertoriée" << std::endl;
 				break;

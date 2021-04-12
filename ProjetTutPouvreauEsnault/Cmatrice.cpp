@@ -280,6 +280,7 @@ void Cmatrice<MType>::MATAfficherMatrice()
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 
