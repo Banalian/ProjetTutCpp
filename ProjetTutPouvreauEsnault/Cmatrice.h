@@ -15,34 +15,35 @@ private:
 	MType ** pMATTab = {};
 
 public:
-	Cmatrice(int iNbLigne, int iNbColonne); //DONE
-	Cmatrice(Cmatrice<MType> &cMATMatrice); //DONE
-	~Cmatrice(); //DONE /TO TEST
+	Cmatrice();
+	Cmatrice(int iNbLigne, int iNbColonne);
+	Cmatrice(Cmatrice<MType> &MATMatrice);
+	~Cmatrice();
 
-	int  MATgetNbLigne(); //DONE
-	int  MATgetNbColonne(); //DONE
+	int  MATgetNbLigne();
+	int  MATgetNbColonne();
 
-	void MATsetNbLigne(int iLigne); //DONE
-	void MATsetNbColonne(int iColonne); //DONE
+	void MATsetNbLigne(int iLigne);
+	void MATsetNbColonne(int iColonne);
 
-	MType** MATgetTabCopy(); //DONE
-	Cmatrice* MATgetMatCopy(); //DONE
+	MType** MATgetTabCopy();
+	Cmatrice* MATgetMatCopy();
 
-	MType MATgetTabCase(int iLigne, int iColonne); //DONE
-	void MATsetTabCase(int iLigne, int iColonne, MType elem); //DONE
+	MType MATgetTabCase(int iLigne, int iColonne);
+	void MATsetTabCase(int iLigne, int iColonne, MType elem);
 
-	void MATAfficherMatrice(); //DONE
-
-
-	Cmatrice<MType>& operator*(MType elem); //DONE
-	Cmatrice<MType>& operator/(MType elem); //DONE
-
-	Cmatrice<MType>& operator+(Cmatrice<MType> cMATelem); //DONE
-	Cmatrice<MType>& operator-(Cmatrice<MType> cMATelem); //DONE
-	Cmatrice<MType>& operator*(Cmatrice<MType> cMATelem); //JE M'EN OCCUPE LILIAN
+	void MATAfficherMatrice();
 
 
-	Cmatrice<MType>* MATTranspMat(); //DONE
+	Cmatrice<MType>& operator*(MType elem);
+	Cmatrice<MType>& operator/(MType elem);
+
+	Cmatrice<MType>& operator+(Cmatrice<MType> MATelem);
+	Cmatrice<MType>& operator-(Cmatrice<MType> MATelem);
+	Cmatrice<MType>& operator*(Cmatrice<MType> MATelem);
+
+
+	Cmatrice<MType>* MATTranspMat();
 
 };
 

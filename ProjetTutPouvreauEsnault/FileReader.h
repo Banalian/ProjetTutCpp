@@ -12,6 +12,7 @@
 #define BUFFSIZE 2048
 
 
+#define ERRFileNotOpen 200
 #define ERRBadTypeFile 201
 #define ERRBadColNb 202
 #define ERRBadLineNb 203
@@ -19,9 +20,9 @@
 
 
 //template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile) {
-template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
+template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 	
-	std::fstream myFile(path);
+	std::fstream myFile(cPath);
 
 
 	if (myFile.is_open()) {
@@ -36,7 +37,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 			if (strcmp(line, "TypeMatrice=double")) {
 				delete line;
 				myFile.close();
-				throw Cexception(201);
+				throw Cexception(ERRBadTypeFile);
 			}
 
 
@@ -85,7 +86,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 					delete line;
 					myFile.close();
 					delete pMATTemp;
-					throw Cexception(202);
+					throw Cexception(ERRBadColNb);
 
 				}
 				
@@ -98,7 +99,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 				delete line;
 				myFile.close();
 				delete pMATTemp;
-				throw Cexception(203);
+				throw Cexception(ERRBadLineNb);
 
 			}
 
@@ -111,8 +112,8 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 
 		}catch(Cexception e){
 
-			int codeErr = e.EXCLire_Code();
-			switch (codeErr)
+			int iCodeErr = e.EXCLire_Code();
+			switch (iCodeErr)
 			{
 			case ERRHorsFomatMat:
 				std::cout << "Erreur : Emplacement donné non valide (ligne ou colonne trop grand ou inférieur à 0" << std::endl;
@@ -138,6 +139,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 
 	}
 	else {
-		std::cout << "Unable to open file." << std::endl;
+		
+		throw Cexception(ERRFileNotOpen);
 	}
 }

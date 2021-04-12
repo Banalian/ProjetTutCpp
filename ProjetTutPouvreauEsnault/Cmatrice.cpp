@@ -1,5 +1,24 @@
 #include "Cmatrice.h"
 
+
+/**
+* @brief creer une matrice vide de taille 1 1 (constructeur par défaut)
+* @return l'objet créé
+*/
+template<class MType>
+Cmatrice<MType>::Cmatrice()
+{
+
+	iMATNbColonne = 1;
+	iMATNbLigne = 1;
+
+	pMATTab = new MType*[1];
+	pMATTab[0] = new MType[1];
+
+	pMATTab[0][0] = {};
+
+}
+
 /**
 * @brief creer une matrice vide de taille iNbLigne iNbColonne
 * @param iNbLigne nombre de ligne(s) de la matrice
@@ -38,11 +57,11 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 * @return l'objet créé
 */
 template<class MType>
-Cmatrice<MType>::Cmatrice(Cmatrice<MType> & cMATMatrice)
+Cmatrice<MType>::Cmatrice(Cmatrice<MType> & MATMatrice)
 {
 
-	iMATNbColonne = cMATMatrice.iMATNbColonne;
-	iMATNbLigne = cMATMatrice.iMATNbLigne;
+	iMATNbColonne = MATMatrice.MATgetNbColonne();
+	iMATNbLigne = MATMatrice.MATgetNbLigne();
 
 	pMATTab = new MType*[iMATNbColonne];
 
@@ -56,7 +75,7 @@ Cmatrice<MType>::Cmatrice(Cmatrice<MType> & cMATMatrice)
 
 		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
 
-			pMATTab[ii][ij] = cMATMatrice.pMATTab[ii][ij];
+			pMATTab[ii][ij] = MATMatrice.pMATTab[ii][ij];
 
 		}
 	}
@@ -346,11 +365,11 @@ Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 * @return une nouvelle matrice qui est le résultat de matrice + matrice
 */
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> cMATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> MATelem)
 {
 
 	//si les matrices ne sont pas de la meme taille
-	if ((iMATNbColonne != cMATelem.MATgetNbColonne()) || (iMATNbLigne != cMATelem.MATgetNbLigne())) {
+	if ((iMATNbColonne != MATelem.MATgetNbColonne()) || (iMATNbLigne != MATelem.MATgetNbLigne())) {
 		throw Cexception(151);
 	}
 
@@ -360,7 +379,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> cMATelem)
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			//simple C = A + B pour chaque cases
-			temp = pMATTab[jBoucle][iBoucle] + cMATelem.MATgetTabCase(iBoucle, jBoucle);
+			temp = pMATTab[jBoucle][iBoucle] + MATelem.MATgetTabCase(iBoucle, jBoucle);
 			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
 	}
@@ -379,12 +398,12 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> cMATelem)
 * @return une nouvelle matrice qui est le résultat de matrice - matrice
 */
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> cMATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> MATelem)
 {
 
 
 	//si les matrices ne sont pas de la meme taille
-	if ((iMATNbColonne != cMATelem.MATgetNbColonne()) || (iMATNbLigne != cMATelem.MATgetNbLigne())) {
+	if ((iMATNbColonne != MATelem.MATgetNbColonne()) || (iMATNbLigne != MATelem.MATgetNbLigne())) {
 		throw Cexception(152);
 	}
 
@@ -394,7 +413,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> cMATelem)
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			//simple C = A - B pour chaque cases
-			temp = pMATTab[jBoucle][iBoucle] - cMATelem.MATgetTabCase(iBoucle, jBoucle);
+			temp = pMATTab[jBoucle][iBoucle] - MATelem.MATgetTabCase(iBoucle, jBoucle);
 			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
 	}
@@ -411,27 +430,27 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> cMATelem)
 * @return une nouvelle matrice qui est le résultat de matrice * matrice
 */
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> cMATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> MATelem)
 {
 
-	if (cMATelem.MATgetNbLigne() != this->iMATNbColonne) {
+	if (MATelem.MATgetNbLigne() != this->iMATNbColonne) {
 		throw Cexception(153);
 	}
 
 
-	Cmatrice<MType>*pMATTemp = new Cmatrice<MType>(this->iMATNbLigne, cMATelem.MATgetNbColonne());
+	Cmatrice<MType>*pMATTemp = new Cmatrice<MType>(this->iMATNbLigne, MATelem.MATgetNbColonne());
 	MType temp;
 	int iLigne, iColonne, iMult;
 
 	for (iLigne = 0; iLigne < iMATNbLigne; iLigne++) {
 
-		for (iColonne = 0; iColonne < cMATelem.MATgetNbColonne(); iColonne++) {
+		for (iColonne = 0; iColonne < MATelem.MATgetNbColonne(); iColonne++) {
 
 			temp = {};
 
 			for (iMult = 0; iMult < iMATNbColonne; iMult++) {
 
-				temp += pMATTab[iMult][iLigne] * cMATelem.MATgetTabCase(iMult, iColonne);
+				temp += pMATTab[iMult][iLigne] * MATelem.MATgetTabCase(iMult, iColonne);
 
 			}
 

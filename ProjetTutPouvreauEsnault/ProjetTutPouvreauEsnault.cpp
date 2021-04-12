@@ -18,9 +18,22 @@ int main(int argc, char *argv[])
 	
 	//crée une matrice pour chaque argv
 	Cmatrice<double>** matTab = new Cmatrice<double>*[argc - 1];
-	for (int i = 0; i < argc; i++) {
-		matTab[i] = createLfMatFromFile<double>(argv[i]);
+
+	try {
+		for (int i = 1; i < argc; i++) {
+			matTab[i-1] = createLfMatFromFile<double>(argv[i]);
+		}
 	}
+	catch (Cexception e) {
+		if (e.EXCLire_Code() == ERRFileNotOpen) {
+			std::cout << "Erreur : incapable d'ouvrir le fichier (mauvais chemin ou mauvais nom.)" << std::endl;	
+		}
+		else {
+			std::cout << "Erreur non définie du main" << std::endl;
+		}
+	}
+
+	
 	
 	//on demande un entier à l'utilisateur
 	int c;
@@ -34,7 +47,7 @@ int main(int argc, char *argv[])
 	Cmatrice<double> altSumMat(nbLignes,nbColonnes);
 	Cmatrice<double> multMat(nbLignes,nbColonnes);
 
-	for (int m = 0; m < argc; m++) {
+	for(int m = 0; m < argc-1; m++) {
 
 		try {
 
@@ -92,5 +105,7 @@ int main(int argc, char *argv[])
 	}
 	delete matTab;
 
+
+	return 0;
 }
 
