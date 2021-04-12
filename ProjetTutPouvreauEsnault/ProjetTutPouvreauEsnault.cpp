@@ -39,11 +39,11 @@ int main(int argc, char *argv[])
 		try {
 
 			Cmatrice<double> copyMatMult(*matTab[m]);				//on multiplie chaque matrice par c
-			copyMatMult*c;
+			copyMatMult = copyMatMult*c;
 			copyMatMult.MATAfficherMatrice();
 
 			Cmatrice<double> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
-			copyMatDiv / c;
+			copyMatMult = copyMatDiv / c;
 			copyMatDiv.MATAfficherMatrice();
 			std::cout << "^ mult and div, sum below" << std::endl;
 			
