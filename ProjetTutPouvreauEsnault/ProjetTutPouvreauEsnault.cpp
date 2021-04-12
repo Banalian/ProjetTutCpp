@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
 			sumMat = sumMat + *matTab[m];							//on fait la somme des matrices
 			if (m % 2 != 0) { altSumMat = altSumMat + *matTab[m]; }	//somme des matrices avec alternance des signes
 			else { altSumMat = altSumMat - *matTab[m]; }
-			multMat = multMat * *matTab[m];							//produit des matrices
+			if (m = 1) { multMat = *matTab[m]; }
+			else { multMat = multMat * *matTab[m]; }							//produit des matrices
 
 
 			std::cout << "end of current mat" << std::endl;
