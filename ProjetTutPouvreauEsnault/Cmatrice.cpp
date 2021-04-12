@@ -292,13 +292,18 @@ void Cmatrice<MType>::MATAfficherMatrice()
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 {
+	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
+	MType temp;
+
 	// TODO: insérer une instruction return ici
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
-			pMATTab[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] * elem;
+			temp = pMATTab[jBoucle][iBoucle] * elem;
+			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
 	}
 
+	return *pMATTemp;
 }
 
 /**
@@ -309,12 +314,19 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 {
+
+	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
+	MType temp;
+
 	// TODO: insérer une instruction return ici
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
-			pMATTab[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] / elem;
+			temp = pMATTab[jBoucle][iBoucle] / elem;
+			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
 	}
+
+	return *pMATTemp;
 }
 
 
@@ -328,17 +340,18 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> cMATelem)
 {
 
 	//si les matrices ne sont pas de la meme taille
-	if ((iMATNbColonne != cMATelem->MATgetNbColonne()) || (iMATNbLigne != cMATelem->MATgetNbLigne())) {
+	if ((iMATNbColonne != cMATelem.MATgetNbColonne()) || (iMATNbLigne != cMATelem.MATgetNbLigne())) {
 		throw Cexception(151);
 	}
 
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
-
+	MType temp;
 
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			//simple C = A + B pour chaque cases
-			pMATTemp[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] + cMATelem->MATgetTabCase(iBoucle, jBoucle);
+			temp = pMATTab[jBoucle][iBoucle] + cMATelem.MATgetTabCase(iBoucle, jBoucle);
+			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
 	}
 
@@ -361,17 +374,18 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> cMATelem)
 
 
 	//si les matrices ne sont pas de la meme taille
-	if ((iMATNbColonne != cMATelem->MATgetNbColonne()) || (iMATNbLigne != cMATelem->MATgetNbLigne())) {
+	if ((iMATNbColonne != cMATelem.MATgetNbColonne()) || (iMATNbLigne != cMATelem.MATgetNbLigne())) {
 		throw Cexception(152);
 	}
 
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
-
+	MType temp;
 
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			//simple C = A - B pour chaque cases
-			pMATTemp[jBoucle][iBoucle] = pMATTab[jBoucle][iBoucle] - cMATelem->MATgetTabCase(iBoucle, jBoucle);
+			temp = pMATTab[jBoucle][iBoucle] - cMATelem.MATgetTabCase(iBoucle, jBoucle);
+			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
 	}
 
@@ -389,21 +403,6 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> cMATelem)
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> cMATelem)
 {
-	// TODO: insérer une instruction return ici
-	/*Produit_matriciel(a: Matrice carr¶ee, b : Matrice carr¶ee, n :
-	entier) : Matrice carr¶ee
-	VAR c : Matrice carr¶ee n*n
-	i : entier
-	Debut
-		Pour i < -1 a n Faire
-			Pour j de 1 a n Faire
-				c[i][j] < -0
-				Pour k de 1 a n Faire
-					c[i][j] < -c[i][j] + a[i][k] * b[k][j]
-				Fpour
-			Fpour
-		Fpour
-	retourner c*/
 
 	if (cMATelem.MATgetNbLigne() != this->iMATNbColonne) {
 		throw Cexception(153);

@@ -45,9 +45,9 @@ int main(int argc, char *argv[])
 		copyMatDiv/c;
 		copyMatDiv.MATAfficherMatrice();
 
-		sumMat = sumMat + matTab[m];							//on fait la somme des matrices
-		if (m % 2 != 0) { altSumMat = altSumMat + matTab[m]; }	//somme des matrices avec alternance des signes
-		else { altSumMat = altSumMat - matTab[m]; }
+		sumMat = sumMat + *matTab[m];							//on fait la somme des matrices
+		if (m % 2 != 0) { altSumMat = altSumMat + *matTab[m]; }	//somme des matrices avec alternance des signes
+		else { altSumMat = altSumMat - *matTab[m]; }
 		multMat = multMat * *matTab[m];							//produit des matrices
 	}
 
