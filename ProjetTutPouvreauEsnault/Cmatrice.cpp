@@ -20,6 +20,15 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMATTab[iBoucle] = new MType[iMATNbLigne];
 	}
+
+	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+
+		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
+
+			pMATTab[ii][ij] = {};
+
+		}
+	}
 }
 
 

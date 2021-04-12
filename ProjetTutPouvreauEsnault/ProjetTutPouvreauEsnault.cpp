@@ -45,14 +45,17 @@ int main(int argc, char *argv[])
 			Cmatrice<double> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
 			copyMatDiv / c;
 			copyMatDiv.MATAfficherMatrice();
-
 			std::cout << "^ mult and div, sum below" << std::endl;
+			
 
 
 			sumMat = sumMat + *matTab[m];							//on fait la somme des matrices
 			if (m % 2 != 0) { altSumMat = altSumMat + *matTab[m]; }	//somme des matrices avec alternance des signes
 			else { altSumMat = altSumMat - *matTab[m]; }
 			multMat = multMat * *matTab[m];							//produit des matrices
+
+
+			std::cout << "end of current mat" << std::endl;
 		
 		}
 		catch (Cexception e) {
