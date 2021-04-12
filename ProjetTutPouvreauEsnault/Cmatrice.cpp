@@ -1,10 +1,5 @@
 #include "Cmatrice.h"
 
-//C'est plutôt calme par ici...
-//J'aime pas beaucoup trop ça...
-//Je préfère quand c'est un peu plus moins calme...
-
-
 /**
 * @brief creer une matrice vide de taille iNbLigne iNbColonne
 * @param iNbLigne nombre de ligne(s) de la matrice

@@ -1,7 +1,7 @@
 // ProjetTutPouvreauEsnault.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
 
-//template comm méthode
+//template comme méthode
 /**
 * @brief
 * @param
@@ -17,10 +17,8 @@ int main(int argc, char *argv[])
 {	
 	
 	//crée une matrice pour chaque argv
-	Cmatrice<float>** matTab = new Cmatrice<float>*[argc - 1];
+	Cmatrice<double>** matTab = new Cmatrice<double>*[argc - 1];
 	for (int i = 1; i < argc; i++) {
-		//std::fstream myFile(argv[i]);
-		//matTab[i] = createLfMatFromFile<double>(&myFile);
 		matTab[i] = createLfMatFromFile<double>(argv[i]);
 	}
 	
@@ -32,18 +30,18 @@ int main(int argc, char *argv[])
 	int nbColonnes = matTab[1]->MATgetNbColonne();
 	int nbLignes = matTab[1]->MATgetNbLigne();
 
-	Cmatrice<float> sumMat(nbLignes,nbColonnes);
-	Cmatrice<float> altSumMat(nbLignes,nbColonnes);
-	Cmatrice<float> multMat(nbLignes,nbColonnes);
+	Cmatrice<double> sumMat(nbLignes,nbColonnes);
+	Cmatrice<double> altSumMat(nbLignes,nbColonnes);
+	Cmatrice<double> multMat(nbLignes,nbColonnes);
 
 	for (int m = 1; m < argc; m++) {
 
 
-		Cmatrice<float> copyMatMult(*matTab[m]);				//on multiplie chaque matrice par c
+		Cmatrice<double> copyMatMult(*matTab[m]);				//on multiplie chaque matrice par c
 		copyMatMult*c;
 		copyMatMult.MATAfficherMatrice();
 
-		Cmatrice<float> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
+		Cmatrice<double> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
 		copyMatDiv/c;
 		copyMatDiv.MATAfficherMatrice();
 
@@ -62,61 +60,5 @@ int main(int argc, char *argv[])
 	}
 	delete matTab;
 
-
-
-	/*Cmatrice<int> testMat(3,3);
-	Cmatrice<float> testMatf(4, 4);
-
-	testMat.MATsetTabCase(2, 2, 3);
-	testMatf.MATsetTabCase(2, 2, 5.978);
-
-
-	Cmatrice<int> testMatCopy(testMat);
-	testMat.MATsetTabCase(2, 2, 5);
-
-
-
-	std::cout << "case int 2 2 : " << testMatCopy.MATgetTabCase(2, 2) << std::endl;*/
-
-	//std::fstream myFile("testFile.txt");
-	char* testfile = new char[13];
-	strcpy(testfile, "testfile.txt");
-
-	//Cmatrice<double>* matDouble = createLfMatFromFile<double>(&myFile);
-	Cmatrice<double>* matDouble = createLfMatFromFile<double>(testfile);
-	
-
-	
-
-	if (matDouble != nullptr) {
-
-		Cmatrice<double>* copyMat = new Cmatrice(*matDouble);
-
-		Cmatrice<double>* copyMatTransp = copyMat->MATTranspMat();
-
-		Cmatrice<double>* testMult = &(*matDouble * *copyMatTransp);
-
-
-		testMult->MATAfficherMatrice();
-		std::cout << std::endl << "fintest mult" << std::endl;
-
-		delete copyMat;
-		delete copyMatTransp;
-		delete testMult;
-
-
-
-
-		matDouble->MATAfficherMatrice();
-		Cmatrice<double>*matDoubleT = matDouble->MATTranspMat();
-		matDoubleT->MATAfficherMatrice();
-		delete matDouble;
-		delete matDoubleT;
-	}
-	
-
-
-	return 0;
-	
 }
 
