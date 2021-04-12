@@ -287,6 +287,13 @@ void Cmatrice<MType>::MATAfficherMatrice()
 	}
 }
 
+
+
+/**
+* @brief multiplie une matrice par un element elem (chaque case * elem)
+* @param elem l'elem par lequel tt les cases seront multipliées
+* @return une nouvelle matrice qui est le résultat de matrice * elem
+*/
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 {
@@ -299,6 +306,11 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 
 }
 
+/**
+* @brief divise une matrice par un element elem (chaque case / elem)
+* @param elem l'elem par lequel tt les cases seront divisées
+* @return une nouvelle matrice qui est le résultat de matrice / elem
+*/
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 {
@@ -310,8 +322,14 @@ Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 	}
 }
 
+
+/**
+* @brief additionne deux matrices
+* @param cMATelem la matrice a additionner
+* @return une nouvelle matrice qui est le résultat de matrice + matrice
+*/
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType>* cMATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> cMATelem)
 {
 
 	//si les matrices ne sont pas de la meme taille
@@ -336,8 +354,14 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType>* cMATelem)
 
 }
 
+
+/**
+* @brief soustrait deux matrices
+* @param cMATelem la matrice que l'on va soustraire
+* @return une nouvelle matrice qui est le résultat de matrice - matrice
+*/
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType>* cMATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> cMATelem)
 {
 
 
@@ -362,6 +386,11 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType>* cMATelem)
 
 }
 
+/**
+* @brief multiplie deux matrices
+* @param cMATelem la matrice a multiplier
+* @return une nouvelle matrice qui est le résultat de matrice * matrice
+*/
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> cMATelem)
 {
@@ -410,67 +439,6 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> cMATelem)
 	return *pMATTemp;
 }
 
-
-
-
-/**
-* @brief Multiplie la matrice par un element elem  (M*elem)
-* @param
-* @return
-*/
-template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATMultVal(MType elem)
-{
-	return nullptr;
-}
-
-
-/**
-* @brief
-* @param
-* @return
-*/
-template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATDivVal(MType elem)
-{
-	return nullptr;
-}
-
-
-/**
-* @brief
-* @param
-* @return
-*/
-template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATAddMat(Cmatrice<MType> * cMATelem)
-{
-	return nullptr;
-}
-
-
-/**
-* @brief
-* @param
-* @return
-*/
-template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATSubMat(Cmatrice<MType> * cMATelem)
-{
-	return nullptr;
-}
-
-
-/**
-* @brief
-* @param
-* @return
-*/
-template<class MType>
-Cmatrice<MType> * Cmatrice<MType>::MATMultMat(Cmatrice<MType> * cMATelem)
-{
-	return nullptr;
-}
 
 
 /**
