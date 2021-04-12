@@ -1,4 +1,7 @@
 #pragma once
+
+//cette ligne sert a désactivé les erreurs pour les commandes comme strtok()
+//car elle sont dépréciées car non thread safe, mais ici étant donné que l'on est en mono-thread pas de soucis
 #pragma warning(disable : 4996)
 
 #include <iostream>
@@ -9,31 +12,30 @@
 #define BUFFSIZE 2048
 
 
-#define ERRHorsFomatMat 101
-#define ERRBadSizeMat 102
 #define ERRBadTypeFile 201
 #define ERRBadColNb 202
 #define ERRBadLineNb 203
-#define ERRWrongSizeAdd 251
-#define ERRWrongSizeMinus 252
 
 
-template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile) {
 
+//template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile) {
+template <class MType> Cmatrice<MType>*createLfMatFromFile(char *path) {
 	
+	std::fstream myFile(path);
 
-	if (myFile->is_open()) {
+
+	if (myFile.is_open()) {
 		
 
 		try {
 			char *line = new char[BUFFSIZE];
 
-			myFile->getline(line, 2048);
+			myFile.getline(line, 2048);
 
 			//std::cout << line << "<end" << std::endl;
 			if (strcmp(line, "TypeMatrice=double")) {
 				delete line;
-				myFile->close();
+				myFile.close();
 				throw Cexception(201);
 			}
 
@@ -44,14 +46,14 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 			int iLigne = 0, iColonne = 0;
 
 			//RECUPERATION LIGNE
-			myFile->getline(line, 2048);
+			myFile.getline(line, 2048);
 			strtok(line, "=");
 			buf = strtok(NULL, "=");
 			//std::cout << "Ligne : buf->" << buf << " <-and line->" << line << std::endl;
 			iLigne = atoi(buf);
 
 			//RECUPERATION COLONNE
-			myFile->getline(line, 2048);
+			myFile.getline(line, 2048);
 			strtok(line, "=");
 			buf = strtok(NULL, "=");
 			//std::cout << "Colonne : buf->" << buf << " <-and line->" << line << std::endl;
@@ -63,11 +65,11 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 
 
 			//RECUPERATION MATRICE
-			myFile->getline(line, 2048);
+			myFile.getline(line, 2048);
 
 			//pour chaque ligne du fichier, qui represente les "lignes" d'une matice
 			for (int iBoucle = 0; iBoucle < iLigne; iBoucle++) {
-				myFile->getline(line, 2048);
+				myFile.getline(line, 2048);
 
 				//pour chaque element de la ligne, qui seront donc placé dans les colonnes correspondantes
 				buf = strtok(line, " ");
@@ -81,7 +83,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 				if (buf != nullptr) {
 					//std::cout << "endbuf=>" << buf << std::endl;
 					delete line;
-					myFile->close();
+					myFile.close();
 					delete pMATTemp;
 					throw Cexception(202);
 
@@ -90,11 +92,11 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 				
 
 			}
-			myFile->getline(line, 2048);
+			myFile.getline(line, 2048);
 			if (strcmp(line, "]")) {
 				//std::cout << "endbuf=>" << buf << std::endl;
 				delete line;
-				myFile->close();
+				myFile.close();
 				delete pMATTemp;
 				throw Cexception(203);
 
@@ -102,7 +104,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 
 			delete line;
 
-			myFile->close();
+			myFile.close();
 
 			return pMATTemp;
 
@@ -132,6 +134,9 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile)
 				break;
 			case ERRWrongSizeMinus:
 				std::cout << "Erreur : Taille des matrices différentes, soustraction impossible" << std::endl;
+				break;
+			case ERRWrongSizeMult:
+				std::cout << "Erreur : Taille des matrices différentes, multiplication impossible" << std::endl;
 				break;
 			default:
 				std::cout << "Erreur non repertoriée" << std::endl;

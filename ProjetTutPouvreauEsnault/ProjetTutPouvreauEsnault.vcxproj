@@ -153,7 +153,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cexception.cpp" />
-    <ClCompile Include="Cmatrice.cpp" />
+    <ClCompile Include="Cmatrice.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ProjetTutPouvreauEsnault.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -19,8 +19,9 @@ int main(int argc, char *argv[])
 	//crée une matrice pour chaque argv
 	Cmatrice<double>** matTab = new Cmatrice<double>*[argc - 1];
 	for (int i = 1; i < argc; i++) {
-		std::fstream myFile(argv[i]);
-		matTab[i] = createLfMatFromFile<double>(&myFile);
+		//std::fstream myFile(argv[i]);
+		//matTab[i] = createLfMatFromFile<double>(&myFile);
+		matTab[i] = createLfMatFromFile<double>(argv[i]);
 	}
 	
 	//on demande un entier à l'utilisateur
@@ -56,10 +57,12 @@ int main(int argc, char *argv[])
 
 	std::cout << "case int 2 2 : " << testMatCopy.MATgetTabCase(2, 2) << std::endl;*/
 
-	std::fstream myFile("testFile.txt");
+	//std::fstream myFile("testFile.txt");
+	char* testfile = new char[13];
+	strcpy(testfile, "testfile.txt");
 
-	Cmatrice<double>* matDouble = createLfMatFromFile<double>(&myFile);
-
+	//Cmatrice<double>* matDouble = createLfMatFromFile<double>(&myFile);
+	Cmatrice<double>* matDouble = createLfMatFromFile<double>(testfile);
 	
 
 	
