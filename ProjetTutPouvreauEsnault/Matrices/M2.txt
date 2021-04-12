@@ -4,5 +4,4 @@ NBColonnes=3
 Matrice=[
 -7 5 2
 3 -1 0
-0 0 0
 ]
