@@ -3,6 +3,7 @@
 
 #define ERRHorsFomatMat 101
 #define ERRBadSizeMat 102
+#define ERRDivByZero 150
 #define ERRWrongSizeAdd 151
 #define ERRWrongSizeMinus 152
 #define ERRWrongSizeMult 153
@@ -41,6 +42,8 @@ public:
 	Cmatrice<MType>& operator+(Cmatrice<MType> MATelem);
 	Cmatrice<MType>& operator-(Cmatrice<MType> MATelem);
 	Cmatrice<MType>& operator*(Cmatrice<MType> MATelem);
+
+	Cmatrice<MType>& operator=(Cmatrice<MType> MATelem);
 
 
 	Cmatrice<MType>* MATTranspMat();

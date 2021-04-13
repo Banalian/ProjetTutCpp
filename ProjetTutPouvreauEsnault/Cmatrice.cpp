@@ -462,6 +462,14 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> MATelem)
 	return *pMATTemp;
 }
 
+template<class MType>
+Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> MATelem)
+{
+	
+	Cmatrice<MType> * pMATTemp = new Cmatrice<MType>(MATelem);
+	return *pMATTemp;
+}
+
 
 
 /**
