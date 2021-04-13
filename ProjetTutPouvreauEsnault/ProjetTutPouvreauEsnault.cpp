@@ -9,9 +9,12 @@
 */
 
 
+/*DECOMMENTER POUR CHECK LES MEM LEAK (+ _CrtDumpMemoryLeaks(); juste avant le return*/
+/*
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
+*/
 
 #include <iostream>
 #include <fstream>
@@ -197,13 +200,13 @@ int main(int argc, char *argv[])
 			switch (iCode)
 			{
 			case ERRWrongSizeAdd:
-				std::cout << "Erreur : Taille des matrices differentes, addition impossible" << std::endl;
+				std::cout << "Erreur : Taille des matrices differentes, addition impossible pour la matrice numéro " << m << std::endl;
 				break;
 			case ERRWrongSizeMinus:
-				std::cout << "Erreur : Taille des matrices differentes, soustraction impossible" << std::endl;
+				std::cout << "Erreur : Taille des matrices differentes, soustraction impossible pour la matrice numéro " << m << std::endl;
 				break;
 			case ERRWrongSizeMult:
-				std::cout << "Erreur : Taille des matrices differentes, multiplication impossible" << std::endl;
+				std::cout << "Erreur : Taille des matrices differentes, multiplication impossible pour la matrice numéro " << m << std::endl;
 				break;
 			default:
 				break;
@@ -260,8 +263,7 @@ int main(int argc, char *argv[])
 	}
 	delete matTab;
 
-
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 	return 0;
 }
 
