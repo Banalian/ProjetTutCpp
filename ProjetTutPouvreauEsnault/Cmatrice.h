@@ -3,6 +3,7 @@
 
 #define ERRHorsFomatMat 101
 #define ERRBadSizeMat 102
+#define ERRBadNewLineCol 103
 #define ERRDivByZero 150
 #define ERRWrongSizeAdd 151
 #define ERRWrongSizeMinus 152
@@ -13,10 +14,10 @@ template <class MType> class Cmatrice
 private:
 	int iMATNbLigne;
 	int iMATNbColonne;
-	MType ** pMATTab = {};
+	MType ** pMATTab = {}; //{} => https://en.cppreference.com/w/cpp/language/value_initialization
 
 public:
-	Cmatrice();
+	explicit Cmatrice(); //ne peut pas etre utilisé pour les conversion
 	Cmatrice(int iNbLigne, int iNbColonne);
 	Cmatrice(Cmatrice<MType> &MATMatrice);
 	~Cmatrice();

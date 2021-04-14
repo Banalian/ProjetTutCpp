@@ -1,7 +1,7 @@
 #pragma once
 
 //cette ligne sert a désactivé les erreurs pour les commandes comme strtok()
-//car elle sont dépréciées car non thread safe, mais ici étant donné que l'on est en mono-thread pas de soucis
+//car elles sont dépréciées car non thread safe, mais ici étant donné que l'on est en mono-thread pas de soucis
 #pragma warning(disable : 4996)
 
 #include <iostream>
@@ -16,11 +16,20 @@
 #define ERRBadTypeFile 201
 #define ERRBadColNb 202
 #define ERRBadLineNb 203
+#define ERRBadFormatFileMat 204
 
 
 
-//template <class MType> Cmatrice<MType>*createLfMatFromFile(std::fstream *myFile) {
-template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
+/**
+* @brief Cree une matrice a partir d'un nom de fichier/chemin vers un fichier
+* @param cPath le chemin menant a ce fichier (exemple :  Matrice/M1.txt)
+* @return une matrice respectant les specification du fichier
+*
+* Précondition :  Le fichier doit respecter un format tres specifique, comme dit dans le sujet de ce projet.
+* Si le fichier est sous un format different, le programme est susceptible de planter ou d'avoir un comportement non defini.
+* Il est cependant capable de detecter les erreurs de type format de la matrice differente des informations specifiee pour nbLigne et nbColonne.
+*/
+template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 	
 	std::fstream myFile(cPath);
 
@@ -33,7 +42,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 
 			myFile.getline(line, 2048);
 
-			//std::cout << line << "<end" << std::endl;
+			//Test du type
 			if (strcmp(line, "TypeMatrice=double")) {
 				delete line;
 				myFile.close();
@@ -50,17 +59,15 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			myFile.getline(line, 2048);
 			strtok(line, "=");
 			buf = strtok(NULL, "=");
-			//std::cout << "Ligne : buf->" << buf << " <-and line->" << line << std::endl;
+			//std::cout << "Ligne : buf->" << buf << " <-and line->" << line << std::endl; //debug
 			iLigne = atoi(buf);
 
 			//RECUPERATION COLONNE
 			myFile.getline(line, 2048);
 			strtok(line, "=");
 			buf = strtok(NULL, "=");
-			//std::cout << "Colonne : buf->" << buf << " <-and line->" << line << std::endl;
+			//std::cout << "Colonne : buf->" << buf << " <-and line->" << line << std::endl;//debug
 			iColonne = atoi(buf);
-
-			std::cout << "Nouvelle matrice de " << iLigne << " ligne(s) et " << iColonne << " colonne(s)" << std::endl;
 			
 			Cmatrice<double>* pMATTemp = new Cmatrice<double>(iLigne, iColonne);
 
@@ -76,6 +83,9 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 				buf = strtok(line, " ");
 				//std::cout << "startbuf=>" << buf << std::endl;
 				for (int jBoucle = 0; jBoucle < iColonne; jBoucle++) {
+					if (buf == nullptr) {
+						throw Cexception(ERRBadFormatFileMat);
+					}
 					double temp = atof(buf);
 					pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 					//std::cout << "buf=>" << buf << std::endl;
@@ -106,7 +116,7 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			delete line;
 
 			myFile.close();
-
+			std::cout << "Nouvelle matrice de " << iLigne << " ligne(s) et " << iColonne << " colonne(s) : succes" << std::endl;
 			return pMATTemp;
 
 
@@ -116,25 +126,29 @@ template <class MType> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			switch (iCodeErr)
 			{
 			case ERRHorsFomatMat:
-				std::cout << "Erreur : Emplacement donné non valide (ligne ou colonne trop grand ou inférieur à 0" << std::endl;
+				std::cout << "Erreur : Emplacement donne non valide (ligne ou colonne trop grand ou inferieur à 0" << std::endl;
 				break;
 			case ERRBadSizeMat:
 				std::cout << "Erreur : Taille de Matrice invalide  :  Ligne ou Colonne < 0 " << std::endl;
 				break;
 			case ERRBadTypeFile:
-				std::cout << "Erreur : Type demandé différent de double" << std::endl;
+				std::cout << "Erreur : Type demande different de double" << std::endl;
 				break;
 			case ERRBadColNb:
-				std::cout << "Erreur : Taille incorrecte : nbColonne plus petit que le nombre de valeur trouvées dans le fichier sur la ligne" << std::endl;
+				std::cout << "Erreur : Taille incorrecte : nbColonne plus petit que le nombre de valeur trouvees dans le fichier sur la ligne" << std::endl;
 				break;
 			case ERRBadLineNb:
-				std::cout << "Erreur : Taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvées dans le fichier" << std::endl;
+				std::cout << "Erreur : Taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvees dans le fichier" << std::endl;
+				break;
+			case ERRBadFormatFileMat:
+				std::cout << "Erreur : ligne ou colonne non trouvee" << std::endl;
 				break;
 			default:
 				std::cout << "Erreur non repertoriée" << std::endl;
 				break;
 			}
-			return nullptr;
+
+			throw Cexception(ERRBadFormatFileMat);
 		}
 
 	}

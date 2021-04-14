@@ -2,7 +2,7 @@
 
 
 /**
-* @brief creer une matrice vide de taille 1 1 (constructeur par défaut)
+* @brief Constructeur par défaut : creer une matrice vide de taille 1 1 (constructeur par défaut)
 * @return l'objet créé
 */
 template<class MType>
@@ -29,7 +29,7 @@ template<class MType>
 Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 {
 	if (iNbColonne < 0 || iNbLigne < 0) {
-		throw Cexception(102);
+		throw Cexception(ERRBadSizeMat);
 	}
 	iMATNbColonne = iNbColonne;
 	iMATNbLigne = iNbLigne;
@@ -126,7 +126,7 @@ template<class MType>
 void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 {
 	if (iLigne < 0) {
-		throw Cexception(103);
+		throw Cexception(ERRBadNewLineCol);
 	}
 
 	int ligne = 0;
@@ -157,9 +157,9 @@ void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 
 	//on supprime l'ancien tableau
 	for (int i = 0; i < iMATNbColonne; i++) {
-		delete pMATTab[i];
+		delete[] pMATTab[i];
 	}
-	delete pMATTab;
+	delete[] pMATTab;
 
 
 	iMATNbLigne = iLigne;
@@ -175,7 +175,7 @@ template<class MType>
 void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 {
 	if (iColonne < 0) {
-		throw Cexception(103);
+		throw Cexception(ERRBadNewLineCol);
 	}
 	int colonne = 0;
 	if (iColonne < iMATNbColonne) {
@@ -207,9 +207,9 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 
 	//on supprime l'ancien tableau
 	for (int i = 0; i < iMATNbColonne; i++) {
-		delete pMATTab[i];
+		delete[] pMATTab[i];
 	}
-	delete pMATTab;
+	delete[] pMATTab;
 
 
 	iMATNbColonne = iColonne;
@@ -266,7 +266,7 @@ template<class MType>
 MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 {
 	if (iColonne >= iMATNbColonne || iLigne >= iMATNbLigne || iColonne < 0 || iLigne < 0) {
-		throw Cexception(101);
+		throw Cexception(ERRHorsFomatMat);
 	}
 	return (pMATTab[iColonne][iLigne]);
 }
@@ -276,6 +276,7 @@ MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 * @brief remplit une case de la matrice avec une variable
 * @param iLigne la ligne où est la case que l'on veut remplir
 * @param iColonne la colonne où est la case que l'on veut remplir
+* @param elem l'element a mettre dans la case (on utilise =, donc opérateur a surcharger selon vos besoins)
 */
 template<class MType>
 void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
@@ -283,7 +284,7 @@ void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 
 
 	if (iColonne > iMATNbColonne || iLigne > iMATNbLigne || iColonne < 0 || iLigne < 0) {
-		throw Cexception(101);
+		throw Cexception(ERRHorsFomatMat);
 	}
 
 	pMATTab[iColonne][iLigne] = elem;
@@ -324,7 +325,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 	MType temp;
 
-	// TODO: insérer une instruction return ici
+
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			temp = pMATTab[jBoucle][iBoucle] * elem;
@@ -347,7 +348,6 @@ Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 	MType temp;
 
-	// TODO: insérer une instruction return ici
 	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			temp = pMATTab[jBoucle][iBoucle] / elem;
@@ -361,14 +361,14 @@ Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 
 /**
 * @brief additionne deux matrices
-* @param cMATelem la matrice a additionner
+* @param MATelem la matrice a additionner
 * @return une nouvelle matrice qui est le résultat de matrice + matrice
 */
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> MATelem)
 {
 
-	//si les matrices ne sont pas de la meme taille
+	//Si les matrices ne sont pas de la meme taille
 	if ((iMATNbColonne != MATelem.MATgetNbColonne()) || (iMATNbLigne != MATelem.MATgetNbLigne())) {
 		throw Cexception(151);
 	}
@@ -402,7 +402,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> MATelem)
 {
 
 
-	//si les matrices ne sont pas de la meme taille
+	//Si les matrices ne sont pas de la meme taille
 	if ((iMATNbColonne != MATelem.MATgetNbColonne()) || (iMATNbLigne != MATelem.MATgetNbLigne())) {
 		throw Cexception(152);
 	}
@@ -426,7 +426,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> MATelem)
 
 /**
 * @brief multiplie deux matrices
-* @param cMATelem la matrice a multiplier
+* @param MATelem la matrice a multiplier
 * @return une nouvelle matrice qui est le résultat de matrice * matrice
 */
 template<class MType>
