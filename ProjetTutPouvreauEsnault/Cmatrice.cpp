@@ -90,9 +90,9 @@ Cmatrice<MType>::~Cmatrice()
 {
 
 	for (int i = 0; i < iMATNbColonne; i++) {
-		delete pMATTab[i];
+		delete[] pMATTab[i];
 	}
-	delete pMATTab;
+	delete[] pMATTab;
 }
 
 

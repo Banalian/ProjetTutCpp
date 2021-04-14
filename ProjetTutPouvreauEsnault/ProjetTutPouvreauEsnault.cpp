@@ -10,11 +10,11 @@
 
 
 /*DECOMMENTER POUR CHECK LES MEM LEAK (+ _CrtDumpMemoryLeaks(); juste avant le return*/
-/*
+/**/
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
-*/
+
 
 #include <iostream>
 #include <fstream>
@@ -49,9 +49,9 @@ int main(int argc, char *argv[])
 	
 	
 	//on demande un entier à l'utilisateur
-	int c;
+	int iChiffreUser;
     std::cout << "Entrez un entier\n";
-	std::cin >> c;
+	std::cin >> iChiffreUser;
 
 	while(!std::cin) {
 		// Si on est là, ce qu'a rentré l'utilisateur n'est pas un chiffre, on redemande donc
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-		std::cin >> c;
+		std::cin >> iChiffreUser;
 	}
 
 	int nbColonnes = matTab[0]->MATgetNbColonne();
@@ -91,21 +91,21 @@ int main(int argc, char *argv[])
 
 			std::cout << "----------------MATRICE " << m << " -------------------------" << std::endl;
 
-			std::cout << "Matrice * " << c << " = " << std::endl;
-			//Cmatrice<double> copyMatMult(*matTab[m]);				//on multiplie chaque matrice par c
-			MATmultMatTab[m] = &(*matTab[m] * c);
-			//copyMatMult = copyMatMult*c;
+			std::cout << "Matrice * " << iChiffreUser << " = " << std::endl;
+			//Cmatrice<double> copyMatMult(*matTab[m]);				//on multiplie chaque matrice par iChiffreUser
+			MATmultMatTab[m] = &(*matTab[m] * iChiffreUser);
+			//copyMatMult = copyMatMult*iChiffreUser;
 			//copyMatMult.MATAfficherMatrice();
 			MATmultMatTab[m]->MATAfficherMatrice();
 
 
-			if (c == 0) {
+			if (iChiffreUser == 0) {
 				throw Cexception(ERRDivByZero);
 			}
-			std::cout << "Matrice / " << c << " = " << std::endl;
-			//Cmatrice<double> copyMatDiv(*matTab[m]);					//on divise chaque matrice par c
-			MATdivMatTab[m] = &(*matTab[m] / c);
-			//copyMatDiv = copyMatDiv / c;
+			std::cout << "Matrice / " << iChiffreUser << " = " << std::endl;
+			//Cmatrice<double> copyMatDiv(*matTab[m]);					//on divise chaque matrice par iChiffreUser
+			MATdivMatTab[m] = &(*matTab[m] / iChiffreUser);
+			//copyMatDiv = copyMatDiv / iChiffreUser;
 			//copyMatDiv.MATAfficherMatrice();
 			MATdivMatTab[m]->MATAfficherMatrice();
 			//std::cout << "^ mult and div, sum below" << std::endl;
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 			switch (iCode)
 			{
 			case ERRDivByZero:
-				std::cout << "Erreur : Division par 0 impossible, operation non effectuee sur la matrice numéro " << m << std::endl;
+				std::cout << "Erreur : Division par 0 impossible, operation non effectuee sur la matrice numero " << m << std::endl;
 				break;
 			default:
 				break;
@@ -165,16 +165,7 @@ int main(int argc, char *argv[])
 					MATtempMat = nullptr;
 					//altSumMat = altSumMat + *matTab[m];
 				}
-
-
-				//produit des matrices
-				MATtempMat = &(*MATmultMat * *matTab[m]);
-				delete MATmultMat;
-				MATmultMat = new Cmatrice<double>(*MATtempMat);
-				delete MATtempMat;
-				MATtempMat = nullptr;
 				
-				//multMat = multMat * *matTab[m];
 			}
 
 
@@ -200,18 +191,44 @@ int main(int argc, char *argv[])
 			switch (iCode)
 			{
 			case ERRWrongSizeAdd:
-				std::cout << "Erreur : Taille des matrices differentes, addition impossible pour la matrice numéro " << m << std::endl;
+				std::cout << "Erreur : Taille des matrices differentes, addition impossible pour la matrice numero " << m << std::endl;
 				break;
 			case ERRWrongSizeMinus:
-				std::cout << "Erreur : Taille des matrices differentes, soustraction impossible pour la matrice numéro " << m << std::endl;
-				break;
-			case ERRWrongSizeMult:
-				std::cout << "Erreur : Taille des matrices differentes, multiplication impossible pour la matrice numéro " << m << std::endl;
+				std::cout << "Erreur : Taille des matrices differentes, soustraction impossible pour la matrice numero " << m << std::endl;
 				break;
 			default:
 				break;
 			}
 	
+
+
+		}
+
+
+		try {
+
+
+			//produit des matrices
+			MATtempMat = &(*MATmultMat * *matTab[m]);
+			delete MATmultMat;
+			MATmultMat = new Cmatrice<double>(*MATtempMat);
+			delete MATtempMat;
+			MATtempMat = nullptr;
+
+			//multMat = multMat * *matTab[m];
+		}
+		catch (Cexception e) {
+
+			int iCode = e.EXCLire_Code();
+			switch (iCode)
+			{
+			case ERRWrongSizeMult:
+				std::cout << "Erreur : Taille des matrices incorrectes, multiplication impossible/non defini pour la matrice numero " << m << std::endl;
+				break;
+			default:
+				break;
+			}
+
 
 
 		}
@@ -251,6 +268,10 @@ int main(int argc, char *argv[])
 		}
 	}
 
+
+	delete[] MATmultMatTab;
+	delete[] MATdivMatTab;
+
 	if (MATtempMat) {
 		delete MATtempMat;
 	}
@@ -261,9 +282,10 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < argc - 1; i++) {
 		delete matTab[i];
 	}
-	delete matTab;
+	delete[] matTab;
 
-	//_CrtDumpMemoryLeaks();
+	//
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
 
