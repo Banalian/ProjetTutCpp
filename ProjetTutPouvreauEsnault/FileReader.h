@@ -30,13 +30,13 @@
 * Si le fichier est sous un format different, le programme est susceptible de planter ou d'avoir un comportement non defini.
 * Il est cependant capable de detecter les erreurs de type format de la matrice differente des informations specifiee pour nbLigne et nbColonne.
 */
-template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
+template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *pcPath) {
 	
 	int iBoucle, jBoucle;
 	char *buf;
 	int iLigne = 0, iColonne = 0;
 
-	std::fstream myFile(cPath);
+	std::fstream myFile(pcPath);
 	
 	
 
@@ -95,6 +95,14 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			//pour chaque ligne du fichier, qui represente les "lignes" d'une matice
 			for (iBoucle = 0; iBoucle < iLigne; iBoucle++) {
 				myFile.getline(line, 2048);
+				if (!strcmp(line, "]")) {
+					//std::cout << "endbuf=>" << buf << std::endl;
+					delete line;
+					myFile.close();
+					delete pMATTemp;
+					throw Cexception(ERRBadLineNb);
+
+				}
 
 				//pour chaque element de la ligne, qui seront donc placé dans les colonnes correspondantes
 				buf = strtok(line, " ");
@@ -155,7 +163,7 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 				std::cout << "Erreur : Taille incorrecte : nbColonne plus petit que le nombre de valeur trouvees dans le fichier sur la ligne" << std::endl;
 				break;
 			case ERRBadLineNb:
-				std::cout << "Erreur : Taille incorrecte : nbLignes plus petit que le nombre de valeur/lignes trouvees dans le fichier" << std::endl;
+				std::cout << "Erreur : Taille incorrecte : nbLignes plus petit ou grand que le nombre de valeur/lignes trouvees dans le fichier" << std::endl;
 				break;
 			case ERRBadFormatFileMat:
 				std::cout << "Erreur : ligne ou colonne non trouvee" << std::endl;

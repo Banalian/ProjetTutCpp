@@ -10,11 +10,11 @@
 
 
 /*DECOMMENTER POUR CHECK LES MEM LEAK (+ _CrtDumpMemoryLeaks(); juste avant le return*/
-/**/
+/*
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
-
+*/
 
 
 
@@ -39,12 +39,12 @@ int main(int argc, char *argv[])
 
 	//On cree une matrice pour chaque argv
 	Cmatrice<double>** pMATtab = new Cmatrice<double>*[argc - 1];
-	int iBoucle;
+	int iBoucle, jBoucle;
 
 	//On essaye de lire chacun des fichiers en paramtre pour en sortir des matrices stockees dans le tableau
 	try {
-		for (iBoucle = 1; iBoucle < argc; iBoucle++) {
-			pMATtab[iBoucle-1] = createLfMatFromFile<double>(argv[iBoucle]);
+		for (iBoucle = 0; iBoucle < argc-1; iBoucle++) {
+			pMATtab[iBoucle] = createLfMatFromFile<double>(argv[iBoucle+1]);
 		}
 	}
 	catch (Cexception e) {
@@ -58,6 +58,11 @@ int main(int argc, char *argv[])
 		else {
 			std::cout << "Erreur non definie du main" << std::endl;
 		}
+
+		for (jBoucle = 0; jBoucle < iBoucle; jBoucle++) {
+			delete pMATtab[jBoucle];
+		}
+		delete[] pMATtab;
 
 		return -1;
 	}
@@ -364,8 +369,7 @@ int main(int argc, char *argv[])
 
 
 	//commentez ou decommentez pur verifier les mem leaks
-	//
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 	return 0;
 }
 
