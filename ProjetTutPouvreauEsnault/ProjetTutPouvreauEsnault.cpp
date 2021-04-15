@@ -39,11 +39,12 @@ int main(int argc, char *argv[])
 
 	//On cree une matrice pour chaque argv
 	Cmatrice<double>** pMATtab = new Cmatrice<double>*[argc - 1];
+	int iBoucle;
 
 	//On essaye de lire chacun des fichiers en paramtre pour en sortir des matrices stockees dans le tableau
 	try {
-		for (int i = 1; i < argc; i++) {
-			pMATtab[i-1] = createLfMatFromFile<double>(argv[i]);
+		for (iBoucle = 1; iBoucle < argc; iBoucle++) {
+			pMATtab[iBoucle-1] = createLfMatFromFile<double>(argv[iBoucle]);
 		}
 	}
 	catch (Cexception e) {

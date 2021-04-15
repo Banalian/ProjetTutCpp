@@ -2,7 +2,7 @@
 
 
 /**
-* @brief Constructeur par défaut : creer une matrice vide de taille 1 1 (constructeur par défaut)
+* @brief Constructeur par défaut : Fabrique une matrice vide de taille 1 1 (constructeur par défaut)
 * @return l'objet créé
 */
 template<class MType>
@@ -20,7 +20,7 @@ Cmatrice<MType>::Cmatrice()
 }
 
 /**
-* @brief creer une matrice vide de taille iNbLigne iNbColonne
+* @brief Fabrique une matrice vide de taille iNbLigne iNbColonne
 * @param iNbLigne nombre de ligne(s) de la matrice
 * @param iNbColonne nombre de colonne(s) de la matrice
 * @return l'objet créé
@@ -52,8 +52,8 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 
 
 /**
-* @brief creer une copie d'une matrice
-* @param cMATMatrice la matrice a copier
+* @brief Constructeur de recopie : cree une copie d'une matrice
+* @param MATMatrice la matrice a copier
 * @return l'objet créé
 */
 template<class MType>
@@ -394,7 +394,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> MATelem)
 
 /**
 * @brief soustrait deux matrices
-* @param cMATelem la matrice que l'on va soustraire
+* @param MATelem la matrice que l'on va soustraire
 * @return une nouvelle matrice qui est le résultat de matrice - matrice
 */
 template<class MType>
@@ -462,6 +462,12 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> MATelem)
 	return *pMATTemp;
 }
 
+
+/**
+* @brief Surcharge du = => equivalent au constructeur de recopie
+* @param MATelem la matrice a copier
+* @return la matrice copiee
+*/
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> MATelem)
 {

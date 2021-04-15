@@ -17,6 +17,7 @@
 #define ERRBadColNb 202
 #define ERRBadLineNb 203
 #define ERRBadFormatFileMat 204
+#define ERRBadFormatLineColFile 205
 
 
 
@@ -31,8 +32,13 @@
 */
 template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 	
-	std::fstream myFile(cPath);
+	int iBoucle, jBoucle;
+	char *buf;
+	int iLigne = 0, iColonne = 0;
 
+	std::fstream myFile(cPath);
+	
+	
 
 	if (myFile.is_open()) {
 		
@@ -41,9 +47,10 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			char *line = new char[BUFFSIZE];
 
 			myFile.getline(line, 2048);
-
+			strtok(line, "=");
+			buf = strtok(NULL, "=");
 			//Test du type
-			if (strcmp(line, "TypeMatrice=double")) {
+			if (strcmp(buf, "double")) {
 				delete line;
 				myFile.close();
 				throw Cexception(ERRBadTypeFile);
@@ -52,14 +59,19 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 
 			
 
-			char *buf;
-			int iLigne = 0, iColonne = 0;
+			
 
 			//RECUPERATION LIGNE
 			myFile.getline(line, 2048);
 			strtok(line, "=");
 			buf = strtok(NULL, "=");
 			//std::cout << "Ligne : buf->" << buf << " <-and line->" << line << std::endl; //debug
+			if (buf == nullptr) {
+				delete line;
+				myFile.close();
+				throw Cexception(ERRBadFormatLineColFile);
+			}
+
 			iLigne = atoi(buf);
 
 			//RECUPERATION COLONNE
@@ -67,6 +79,11 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			strtok(line, "=");
 			buf = strtok(NULL, "=");
 			//std::cout << "Colonne : buf->" << buf << " <-and line->" << line << std::endl;//debug
+			if (buf == nullptr) {
+				delete line;
+				myFile.close();
+				throw Cexception(ERRBadFormatLineColFile);
+			}
 			iColonne = atoi(buf);
 			
 			Cmatrice<double>* pMATTemp = new Cmatrice<double>(iLigne, iColonne);
@@ -76,13 +93,13 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			myFile.getline(line, 2048);
 
 			//pour chaque ligne du fichier, qui represente les "lignes" d'une matice
-			for (int iBoucle = 0; iBoucle < iLigne; iBoucle++) {
+			for (iBoucle = 0; iBoucle < iLigne; iBoucle++) {
 				myFile.getline(line, 2048);
 
 				//pour chaque element de la ligne, qui seront donc placé dans les colonnes correspondantes
 				buf = strtok(line, " ");
 				//std::cout << "startbuf=>" << buf << std::endl;
-				for (int jBoucle = 0; jBoucle < iColonne; jBoucle++) {
+				for (jBoucle = 0; jBoucle < iColonne; jBoucle++) {
 					if (buf == nullptr) {
 						throw Cexception(ERRBadFormatFileMat);
 					}
@@ -143,8 +160,11 @@ template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *cPath) {
 			case ERRBadFormatFileMat:
 				std::cout << "Erreur : ligne ou colonne non trouvee" << std::endl;
 				break;
+			case ERRBadFormatLineColFile:
+				std::cout << "Erreur : nombre de ligne(s) ou de colonne(s) non trouvee" << std::endl;
+				break;
 			default:
-				std::cout << "Erreur non repertoriée" << std::endl;
+				std::cout << "Erreur non repertoriee" << std::endl;
 				break;
 			}
 
