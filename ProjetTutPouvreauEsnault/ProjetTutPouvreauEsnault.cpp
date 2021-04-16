@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 {	
 	
 	if (argc < 2) {
-		std::cout << "Erreur :  aucune matrice fournie en paramètre, arrêt du programme" << std::endl;
+		std::cout << "Erreur :  aucune matrice fournie en parametre, arret du programme" << std::endl;
 		return -1;
 	}
 
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 	//!std::cin => check si la valeur entrée est du format de celle attendu
 	while(!std::cin) {
 		// Si on est là, ce qu'a rentré l'utilisateur n'est pas un chiffre, on redemande donc
-		std::cout << "NaN : Entrez un entier à nouveau" << std::endl;
+		std::cout << "NaN : Entrez un entier a nouveau" << std::endl;
 
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

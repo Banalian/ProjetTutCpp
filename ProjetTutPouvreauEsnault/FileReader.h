@@ -29,6 +29,28 @@
 * Precondition :  Le fichier doit respecter un format tres specifique, comme dit dans le sujet de ce projet.
 * Si le fichier est sous un format different, le programme est susceptible de planter ou d'avoir un comportement non defini.
 * Il est cependant capable de detecter les erreurs de type format de la matrice differente des informations specifiee pour nbLigne et nbColonne.
+* 
+* Format du fichier attendu :
+* TypeMatrice=<type_base_C>
+*	NBLignes=<Nombre_de_lignes_de_la_matrice>
+*	NBColonnes=<Nombre_de_colonnes_de_la_matrice>
+*	Matrice=[
+*	<Ligne_1 : autant d’éléments que de colonnes>
+*	<Ligne_n : autant d’éléments que de colonnes>
+*	…
+*	<Ligne_NBLignes : autant d’éléments que de colonnes>
+*	]
+* ----------------------------------------------------------------------
+* Exemple concret :
+* TypeMatrice=double
+*	NBLignes=2
+*	NBColonnes=3
+*	Matrice=[
+*	5 3.5 6
+*	1.05 -2 8
+*	]
+* 
+* 
 */
 template <class MType=double> Cmatrice<MType>*createLfMatFromFile(char *pcPath) {
 	
