@@ -2,8 +2,8 @@
 
 
 /**
-* @brief Constructeur par défaut : Fabrique une matrice vide de taille 1 1 (constructeur par défaut)
-* @return l'objet créé
+* @brief Constructeur par defaut : Fabrique une matrice vide de taille 1 1 (constructeur par defaut)
+* @return l'objet cree
 */
 template<class MType>
 Cmatrice<MType>::Cmatrice()
@@ -23,7 +23,7 @@ Cmatrice<MType>::Cmatrice()
 * @brief Fabrique une matrice vide de taille iNbLigne iNbColonne
 * @param iNbLigne nombre de ligne(s) de la matrice
 * @param iNbColonne nombre de colonne(s) de la matrice
-* @return l'objet créé
+* @return l'objet cree
 */
 template<class MType>
 Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
@@ -54,7 +54,7 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 /**
 * @brief Constructeur de recopie : cree une copie d'une matrice
 * @param MATMatrice la matrice a copier
-* @return l'objet créé
+* @return l'objet cree
 */
 template<class MType>
 Cmatrice<MType>::Cmatrice(Cmatrice<MType> & MATMatrice)
@@ -119,7 +119,7 @@ int Cmatrice<MType>::MATgetNbColonne()
 
 
 /**
-* @brief change le nombre de ligne du tableau. ATTENTION :  toute donnée hors format sera perdu (mais non détruite) et les nouvelles cases seront vide
+* @brief change le nombre de ligne du tableau. ATTENTION :  toute donnee hors format sera perdue (mais non detruite) et les nouvelles cases seront vide
 * @param le nouveau nombre de ligne
 */
 template<class MType>
@@ -138,7 +138,7 @@ void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 		ligne = iMATNbLigne;
 	}
 
-	//on crée un nouveau tableau de la bonne taille
+	//on cree un nouveau tableau de la bonne taille
 	MType** pMATTemp = new MType*[iMATNbColonne];
 	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMATTemp[iBoucle] = new MType[iLigne];
@@ -168,7 +168,7 @@ void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 
 
 /**
-* @brief change le nombre de colonne du tableau. ATTENTION :  toute donnée hors format sera perdue et détruite et les nouvelles cases seront vide
+* @brief change le nombre de colonne du tableau. ATTENTION :  toute donnee hors format sera perdue (mais non detruite) et les nouvelles cases seront vide
 * @param le nouveau nombre de colonne
 */
 template<class MType>
@@ -187,7 +187,7 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 
 
 
-	//on crée un nouveau tableau de la bonne taille
+	//on cree un nouveau tableau de la bonne taille
 	MType** pMATTemp = new MType*[iColonne];
 	for (int iBoucle = 0; iBoucle < iColonne; iBoucle++) {
 		pMATTemp[iBoucle] = new MType[iMATNbLigne];
@@ -257,9 +257,9 @@ Cmatrice<MType> * Cmatrice<MType>::MATgetMatCopy()
 
 
 /**
-* @brief recupere une case de la matrice précise
-* @param iLigne la ligne où est la case souhaitée
-* @param iColonne la colonne où est la case souhaitée
+* @brief recupere une case de la matrice precise
+* @param iLigne la ligne où est la case souhaitee
+* @param iColonne la colonne où est la case souhaitee
 * @return un pointeur vers la variable contenu dans la case
 */
 template<class MType>
@@ -276,7 +276,7 @@ MType Cmatrice<MType>::MATgetTabCase(int iLigne, int iColonne)
 * @brief remplit une case de la matrice avec une variable
 * @param iLigne la ligne où est la case que l'on veut remplir
 * @param iColonne la colonne où est la case que l'on veut remplir
-* @param elem l'element a mettre dans la case (on utilise =, donc opérateur a surcharger selon vos besoins)
+* @param elem l'element a mettre dans la case (on utilise =, donc operateur a surcharger selon vos besoins)
 */
 template<class MType>
 void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
@@ -298,7 +298,7 @@ void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 
 
 /**
-* @brief Affiche la Matrice dans la sortie standard. ATTENTION : Prévoir l'opération si elle n'est pas déjà définie (opérateur <<)
+* @brief Affiche la Matrice dans la sortie standard. ATTENTION : Prevoir l'operation si elle n'est pas dejà definie (operateur <<)
 */
 template<class MType>
 void Cmatrice<MType>::MATAfficherMatrice()
@@ -316,8 +316,8 @@ void Cmatrice<MType>::MATAfficherMatrice()
 
 /**
 * @brief multiplie une matrice par un element elem (chaque case * elem)
-* @param elem l'elem par lequel tt les cases seront multipliées
-* @return une nouvelle matrice qui est le résultat de matrice * elem
+* @param elem l'elem par lequel tt les cases seront multipliees
+* @return une nouvelle matrice qui est le resultat de matrice * elem
 */
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
@@ -338,8 +338,8 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 
 /**
 * @brief divise une matrice par un element elem (chaque case / elem)
-* @param elem l'elem par lequel tt les cases seront divisées
-* @return une nouvelle matrice qui est le résultat de matrice / elem
+* @param elem l'elem par lequel tt les cases seront divisees
+* @return une nouvelle matrice qui est le resultat de matrice / elem
 */
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
@@ -362,7 +362,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 /**
 * @brief additionne deux matrices
 * @param MATelem la matrice a additionner
-* @return une nouvelle matrice qui est le résultat de matrice + matrice
+* @return une nouvelle matrice qui est le resultat de matrice + matrice
 */
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> MATelem)
@@ -395,7 +395,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> MATelem)
 /**
 * @brief soustrait deux matrices
 * @param MATelem la matrice que l'on va soustraire
-* @return une nouvelle matrice qui est le résultat de matrice - matrice
+* @return une nouvelle matrice qui est le resultat de matrice - matrice
 */
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> MATelem)
@@ -427,7 +427,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> MATelem)
 /**
 * @brief multiplie deux matrices
 * @param MATelem la matrice a multiplier
-* @return une nouvelle matrice qui est le résultat de matrice * matrice
+* @return une nouvelle matrice qui est le resultat de matrice * matrice
 */
 template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> MATelem)
@@ -479,8 +479,8 @@ Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> MATelem)
 
 
 /**
-* @brief donne la transposée d'une matrice
-* @return un pointeur vers une nouvelle matrice qui est la transposée de celle actuelle
+* @brief donne la transposee d'une matrice
+* @return un pointeur vers une nouvelle matrice qui est la transposee de celle actuelle
 */
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATTranspMat()
@@ -502,3 +502,27 @@ Cmatrice<MType> * Cmatrice<MType>::MATTranspMat()
 	return pMATTemp;
 }
 
+
+
+/**
+* @brief Surcharge de << => sert a output plus facilement une matrice
+* exemple : std::cout << matrice;
+* @param out le flux probablement std::cout la plupart du temps
+* @param MATelem la Matrice a afficher
+*/
+template <class MType>
+std::ostream& operator<<(std::ostream& out, Cmatrice<MType> & MATelem) {
+	//...
+	int nbLigne = MATelem.MATgetNbLigne();
+	int nbColonne = MATelem.MATgetNbColonne();
+
+	for (int iBoucle = 0; iBoucle < nbLigne; iBoucle++) {
+		for (int jBoucle = 0; jBoucle < nbColonne; jBoucle++) {
+			out << MATelem.MATgetTabCase(iBoucle, jBoucle) << "\t";
+		}
+		out << std::endl;
+	}
+	out << std::endl;
+
+	return out;
+}

@@ -1,7 +1,7 @@
 // ProjetTutPouvreauEsnault.cpp : Réalisé par Corentin Esnault et Pouvreau Lilian
 //
 
-//template comme méthode
+//template comme methode
 /**
 * @brief
 * @param
@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
 	try {
 		for (iBoucle = 0; iBoucle < argc-1; iBoucle++) {
 			pMATtab[iBoucle] = createLfMatFromFile<double>(argv[iBoucle+1]);
+
+			std::cout << *pMATtab[iBoucle] << std::endl;
 		}
 	}
 	catch (Cexception e) {

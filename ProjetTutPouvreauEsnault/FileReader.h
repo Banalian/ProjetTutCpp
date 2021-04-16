@@ -26,7 +26,7 @@
 * @param cPath le chemin menant a ce fichier (exemple :  Matrice/M1.txt)
 * @return une matrice respectant les specification du fichier
 *
-* Précondition :  Le fichier doit respecter un format tres specifique, comme dit dans le sujet de ce projet.
+* Precondition :  Le fichier doit respecter un format tres specifique, comme dit dans le sujet de ce projet.
 * Si le fichier est sous un format different, le programme est susceptible de planter ou d'avoir un comportement non defini.
 * Il est cependant capable de detecter les erreurs de type format de la matrice differente des informations specifiee pour nbLigne et nbColonne.
 */
