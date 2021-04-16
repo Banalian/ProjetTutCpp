@@ -18,7 +18,7 @@ template <class MType> class Cmatrice
 private:
 	int iMATNbLigne;
 	int iMATNbColonne;
-	MType ** pMATTab = {}; //{} => https://en.cppreference.com/w/cpp/language/value_initialization
+	MType ** pMTYTab = {}; //{} => https://en.cppreference.com/w/cpp/language/value_initialization
 
 public:
 
