@@ -469,11 +469,23 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> MATelem)
 * @return la matrice copiee
 */
 template<class MType>
-Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> MATelem)
+Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> &MATelem)
 {
 	
-	Cmatrice<MType> * pMATTemp = new Cmatrice<MType>(MATelem);
-	return *pMATTemp;
+	iMATNbLigne = MATelem.iMATNbLigne();
+	iMATNbColonne = MATelem.iMATNbColonne();
+
+
+	if (pMTYTab) {
+		for (int i = 0; i < iMATNbColonne; i++) {
+			delete[] pMTYTab[i];
+		}
+		delete[] pMTYTab;
+	}
+	pMTYTab = MATelem.MATgetTabCopy();
+
+	//Cmatrice<MType> * pMATTemp = new Cmatrice<MType>(MATelem);//old incorrect way
+	return *this;
 }
 
 

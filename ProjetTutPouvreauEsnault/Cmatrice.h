@@ -142,7 +142,7 @@ public:
 	* @param MATelem la matrice a copier
 	* @return la matrice copiee
 	*/
-	Cmatrice<MType>& operator=(Cmatrice<MType> MATelem);
+	Cmatrice<MType>& operator=(Cmatrice<MType> &MATelem);
 
 
 	/**
