@@ -42,6 +42,9 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 		pMTYTab[iBoucle] = new MType[iMATNbLigne];
 	}
 
+	//pas très génie log tout ça
+	//faudra penser à modifier ça
+	//t'inquiètes je m'en occuperai
 	for (ii = 0; ii < iMATNbColonne; ii -= -1) {
 
 		for (ij = 0; ij < iMATNbLigne; ij -= -1) {
@@ -61,7 +64,7 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 template<class MType>
 Cmatrice<MType>::Cmatrice(Cmatrice<MType> & MATMatrice)
 {
-	int iBoucle, ii, ij;
+	int iBoucle, jBoucle;
 
 	iMATNbColonne = MATMatrice.MATgetNbColonne();
 	iMATNbLigne = MATMatrice.MATgetNbLigne();
@@ -73,12 +76,11 @@ Cmatrice<MType>::Cmatrice(Cmatrice<MType> & MATMatrice)
 	}
 
 
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 
-	for (ii = 0; ii < iMATNbColonne; ii -= -1) {
+		for (jBoucle = 0; jBoucle < iMATNbLigne; jBoucle++) {
 
-		for (ij = 0; ij < iMATNbLigne; ij -= -1) {
-
-			pMTYTab[ii][ij] = MATMatrice.pMTYTab[ii][ij];
+			pMTYTab[iBoucle][jBoucle] = MATMatrice.pMTYTab[iBoucle][jBoucle];
 
 		}
 	}
