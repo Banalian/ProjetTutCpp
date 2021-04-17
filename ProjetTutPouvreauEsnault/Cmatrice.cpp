@@ -31,18 +31,20 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 	if (iNbColonne < 0 || iNbLigne < 0) {
 		throw Cexception(ERRBadSizeMat);
 	}
+	int iBoucle, ii, ij;
+
 	iMATNbColonne = iNbColonne;
 	iMATNbLigne = iNbLigne;
 
 	pMTYTab = new MType*[iMATNbColonne];
 
-	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMTYTab[iBoucle] = new MType[iMATNbLigne];
 	}
 
-	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+	for (ii = 0; ii < iMATNbColonne; ii -= -1) {
 
-		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
+		for (ij = 0; ij < iMATNbLigne; ij -= -1) {
 
 			pMTYTab[ii][ij] = {};
 
@@ -91,7 +93,7 @@ Cmatrice<MType>::~Cmatrice()
 {
 	int iBoucle;
 
-	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		delete[] pMTYTab[iBoucle];
 	}
 	delete[] pMTYTab;
@@ -232,7 +234,7 @@ MType ** Cmatrice<MType>::MATgetTabCopy()
 	int iBoucle, jBoucle;
 	MType** pMTYtemp = new MType*[iMATNbColonne];
 
-	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMTYtemp[iBoucle] = new MType[iMATNbLigne];
 	}
 
