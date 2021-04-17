@@ -11,7 +11,7 @@
 
 
 /**
-* Classe Cmatrice :  permet d'avoir des matrices et de realiser des operations comme la multiplication, ou avoir la transposee.
+* Classe Cmatrice : Permet d'avoir des matrices et de realiser des operations comme la multiplication, ou avoir la transposee.
 */
 template <class MType> class Cmatrice
 {
