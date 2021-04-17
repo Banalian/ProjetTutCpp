@@ -59,21 +59,22 @@ Cmatrice<MType>::Cmatrice(int iNbLigne, int iNbColonne)
 template<class MType>
 Cmatrice<MType>::Cmatrice(Cmatrice<MType> & MATMatrice)
 {
+	int iBoucle, ii, ij;
 
 	iMATNbColonne = MATMatrice.MATgetNbColonne();
 	iMATNbLigne = MATMatrice.MATgetNbLigne();
 
 	pMTYTab = new MType*[iMATNbColonne];
 
-	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMTYTab[iBoucle] = new MType[iMATNbLigne];
 	}
 
 
 
-	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+	for (ii = 0; ii < iMATNbColonne; ii -= -1) {
 
-		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
+		for (ij = 0; ij < iMATNbLigne; ij -= -1) {
 
 			pMTYTab[ii][ij] = MATMatrice.pMTYTab[ii][ij];
 
@@ -88,9 +89,10 @@ Cmatrice<MType>::Cmatrice(Cmatrice<MType> & MATMatrice)
 template<class MType>
 Cmatrice<MType>::~Cmatrice()
 {
+	int iBoucle;
 
-	for (int i = 0; i < iMATNbColonne; i++) {
-		delete[] pMTYTab[i];
+	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		delete[] pMTYTab[iBoucle];
 	}
 	delete[] pMTYTab;
 }
@@ -129,7 +131,7 @@ void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 		throw Cexception(ERRBadNewLineCol);
 	}
 
-	int ligne = 0;
+	int ligne, iBoucle, jBoucle;
 
 	if (iLigne < iMATNbLigne) {
 		ligne = iLigne;
@@ -138,26 +140,28 @@ void Cmatrice<MType>::MATsetNbLigne(int iLigne)
 		ligne = iMATNbLigne;
 	}
 
+
 	//on cree un nouveau tableau de la bonne taille
 	MType** pMTYTemp = new MType*[iMATNbColonne];
-	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMTYTemp[iBoucle] = new MType[iLigne];
 	}
 
 	//on recopie les valeurs du tableau actuel dans le tableau qui le remplacera
-	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 
-		for (int ij = 0; ij < ligne; ij -= -1) {
+		for (jBoucle = 0; jBoucle < ligne; jBoucle++) {
 
-			pMTYTemp[ii][ij] = pMTYTab[ii][ij];
+			pMTYTemp[iBoucle][jBoucle] = pMTYTab[iBoucle][jBoucle];
 
 		}
 	}
 
 
 	//on supprime l'ancien tableau
-	for (int i = 0; i < iMATNbColonne; i++) {
-		delete[] pMTYTab[i];
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		delete[] pMTYTab[iBoucle];
 	}
 	delete[] pMTYTab;
 
@@ -177,7 +181,8 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 	if (iColonne < 0) {
 		throw Cexception(ERRBadNewLineCol);
 	}
-	int colonne = 0;
+	int colonne = 0, iBoucle, jBoucle;
+
 	if (iColonne < iMATNbColonne) {
 		colonne = iColonne;
 	}
@@ -189,16 +194,16 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 
 	//on cree un nouveau tableau de la bonne taille
 	MType** pMTYTemp = new MType*[iColonne];
-	for (int iBoucle = 0; iBoucle < iColonne; iBoucle++) {
+	for (iBoucle = 0; iBoucle < iColonne; iBoucle++) {
 		pMTYTemp[iBoucle] = new MType[iMATNbLigne];
 	}
 
 	//on recopie les valeurs du tableau actuel dans le tableau qui le remplacera
-	for (int ii = 0; ii < colonne; ii -= -1) {
+	for (iBoucle = 0; iBoucle < colonne; iBoucle++) {
 
-		for (int ij = 0; ij < iMATNbLigne; ij -= -1) {
+		for (jBoucle = 0; jBoucle < iMATNbLigne; jBoucle++) {
 
-			pMTYTemp[ii][ij] = pMTYTab[ii][ij];
+			pMTYTemp[iBoucle][jBoucle] = pMTYTab[iBoucle][jBoucle];
 
 		}
 	}
@@ -206,8 +211,8 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 
 
 	//on supprime l'ancien tableau
-	for (int i = 0; i < iMATNbColonne; i++) {
-		delete[] pMTYTab[i];
+	for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+		delete[] pMTYTab[iBoucle];
 	}
 	delete[] pMTYTab;
 
@@ -224,18 +229,18 @@ void Cmatrice<MType>::MATsetNbColonne(int iColonne)
 template<class MType>
 MType ** Cmatrice<MType>::MATgetTabCopy()
 {
-
+	int iBoucle, jBoucle;
 	MType** pMTYtemp = new MType*[iMATNbColonne];
 
 	for (int iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
 		pMTYtemp[iBoucle] = new MType[iMATNbLigne];
 	}
 
-	for (int ii = 0; ii < iMATNbColonne; ii -= -1) {
+	for (iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
 
-		for (int ij = 0; ij < iMATNbColonne; ij -= -1) {
+		for (jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 
-			pMTYtemp[ij][ii] = MATgetTabCase(ii, ij);
+			pMTYtemp[jBoucle][iBoucle] = MATgetTabCase(iBoucle, jBoucle);
 
 		}
 	}
@@ -303,8 +308,10 @@ void Cmatrice<MType>::MATsetTabCase(int iLigne, int iColonne, MType elem)
 template<class MType>
 void Cmatrice<MType>::MATAfficherMatrice()
 {
-	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+	int iBoucle, jBoucle;
+
+	for (iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			std::cout << pMTYTab[jBoucle][iBoucle] << "\t";
 		}
 		std::cout << std::endl;
@@ -324,10 +331,11 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(MType elem)
 {
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 	MType temp;
+	int iBoucle, jBoucle;
 
 
-	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			temp = pMTYTab[jBoucle][iBoucle] * elem;
 			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
@@ -347,9 +355,10 @@ Cmatrice<MType>& Cmatrice<MType>::operator/(MType elem)
 
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 	MType temp;
+	int iBoucle, jBoucle;
 
-	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			temp = pMTYTab[jBoucle][iBoucle] / elem;
 			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
 		}
@@ -370,14 +379,15 @@ Cmatrice<MType>& Cmatrice<MType>::operator+(Cmatrice<MType> MATelem)
 
 	//Si les matrices ne sont pas de la meme taille
 	if ((iMATNbColonne != MATelem.MATgetNbColonne()) || (iMATNbLigne != MATelem.MATgetNbLigne())) {
-		throw Cexception(151);
+		throw Cexception(ERRWrongSizeAdd);
 	}
 
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 	MType temp;
+	int iBoucle, jBoucle;
 
-	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			//simple C = A + B pour chaque cases
 			temp = pMTYTab[jBoucle][iBoucle] + MATelem.MATgetTabCase(iBoucle, jBoucle);
 			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
@@ -404,14 +414,15 @@ Cmatrice<MType>& Cmatrice<MType>::operator-(Cmatrice<MType> MATelem)
 
 	//Si les matrices ne sont pas de la meme taille
 	if ((iMATNbColonne != MATelem.MATgetNbColonne()) || (iMATNbLigne != MATelem.MATgetNbLigne())) {
-		throw Cexception(152);
+		throw Cexception(ERRWrongSizeMinus);
 	}
 
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbLigne, iMATNbColonne);
 	MType temp;
+	int iBoucle, jBoucle;
 
-	for (int iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
-		for (int jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
+	for (iBoucle = 0; iBoucle < iMATNbLigne; iBoucle++) {
+		for (jBoucle = 0; jBoucle < iMATNbColonne; jBoucle++) {
 			//simple C = A - B pour chaque cases
 			temp = pMTYTab[jBoucle][iBoucle] - MATelem.MATgetTabCase(iBoucle, jBoucle);
 			pMATTemp->MATsetTabCase(iBoucle, jBoucle, temp);
@@ -434,7 +445,7 @@ Cmatrice<MType>& Cmatrice<MType>::operator*(Cmatrice<MType> MATelem)
 {
 
 	if (MATelem.MATgetNbLigne() != this->iMATNbColonne) {
-		throw Cexception(153);
+		throw Cexception(ERRWrongSizeMult);
 	}
 
 
@@ -472,13 +483,15 @@ template<class MType>
 Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> &MATelem)
 {
 	
+	int iBoucle;
+
 	iMATNbLigne = MATelem.iMATNbLigne();
 	iMATNbColonne = MATelem.iMATNbColonne();
 
 
 	if (pMTYTab) {
-		for (int i = 0; i < iMATNbColonne; i++) {
-			delete[] pMTYTab[i];
+		for (iBoucle = 0; iBoucle < iMATNbColonne; iBoucle++) {
+			delete[] pMTYTab[iBoucle];
 		}
 		delete[] pMTYTab;
 	}
@@ -497,13 +510,13 @@ Cmatrice<MType>& Cmatrice<MType>::operator=(Cmatrice<MType> &MATelem)
 template<class MType>
 Cmatrice<MType> * Cmatrice<MType>::MATTranspMat()
 {
-
+	int iBoucleColonne, jBoucleLigne;
 	Cmatrice<MType>* pMATTemp = new Cmatrice(iMATNbColonne, iMATNbLigne);
 
 
-	for (int iBoucleColonne = 0; iBoucleColonne < iMATNbColonne; iBoucleColonne++) {
+	for (iBoucleColonne = 0; iBoucleColonne < iMATNbColonne; iBoucleColonne++) {
 
-		for (int jBoucleLigne = 0; jBoucleLigne < iMATNbLigne; jBoucleLigne++) {
+		for (jBoucleLigne = 0; jBoucleLigne < iMATNbLigne; jBoucleLigne++) {
 
 			pMATTemp->MATsetTabCase(iBoucleColonne, jBoucleLigne, pMTYTab[iBoucleColonne][jBoucleLigne]);
 
@@ -527,9 +540,10 @@ std::ostream& operator<<(std::ostream& out, Cmatrice<MType> & MATelem) {
 	//...
 	int nbLigne = MATelem.MATgetNbLigne();
 	int nbColonne = MATelem.MATgetNbColonne();
+	int iBoucle, jBoucle;
 
-	for (int iBoucle = 0; iBoucle < nbLigne; iBoucle++) {
-		for (int jBoucle = 0; jBoucle < nbColonne; jBoucle++) {
+	for (iBoucle = 0; iBoucle < nbLigne; iBoucle++) {
+		for (jBoucle = 0; jBoucle < nbColonne; jBoucle++) {
 			out << MATelem.MATgetTabCase(iBoucle, jBoucle) << "\t";
 		}
 		out << std::endl;

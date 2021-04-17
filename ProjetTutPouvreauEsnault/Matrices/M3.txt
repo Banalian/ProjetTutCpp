@@ -1,4 +1,4 @@
-TypeMatrice=double
+TypeMatrice =double
 NBLignes=3
 NBColonnes=3
 Matrice=[

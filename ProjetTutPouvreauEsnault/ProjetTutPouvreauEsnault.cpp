@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 
 
 
-	for (int iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
+	for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
 		MATmultMatTab[iBoucle] = nullptr;
 		MATdivMatTab[iBoucle] = nullptr;
 		iSuccessMult[iBoucle] = 1;
@@ -128,8 +128,9 @@ int main(int argc, char *argv[])
 
 	//--------------------------------------Calculs-------------------------------------------------------------------//
 
+	int iCurrentMat;
 
-	for(int iCurrentMat = 0; iCurrentMat < argc-1; iCurrentMat++) {
+	for(iCurrentMat = 0; iCurrentMat < argc-1; iCurrentMat++) {
 
 		try {
 
@@ -339,7 +340,7 @@ int main(int argc, char *argv[])
 
 
 
-	for (int iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
+	for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
 		if (MATmultMatTab[iBoucle]) {
 			delete MATmultMatTab[iBoucle];
 		}
@@ -361,8 +362,8 @@ int main(int argc, char *argv[])
 	}
 
 
-	for (int i = 0; i < argc - 1; i++) {
-		delete pMATtab[i];
+	for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
+		delete pMATtab[iBoucle];
 	}
 	delete[] pMATtab;
 
