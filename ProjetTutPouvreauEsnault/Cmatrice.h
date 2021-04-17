@@ -26,7 +26,7 @@ public:
 	* @brief Constructeur par défaut : Fabrique une matrice vide de taille 1 1 (constructeur par défaut)
 	* @return l'objet cree
 	*/
-	explicit Cmatrice(); //explicit => ne peut pas etre utilise pour les conversion
+	explicit Cmatrice(); //explicit => ne peut pas etre utilisee pour les conversion
 
 	/**
 	* @brief Fabrique une matrice vide de taille iNbLigne iNbColonne
